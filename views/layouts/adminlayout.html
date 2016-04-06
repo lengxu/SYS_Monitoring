@@ -43,23 +43,10 @@
 
     <!-- END GLOBAL MANDATORY STYLES -->
 
-    <!-- BEGIN PAGE LEVEL STYLES -->
-
-    <link href="/admin/css/jquery.gritter.css" rel="stylesheet" type="text/css"/>
-
-    <link href="/admin/css/daterangepicker.css" rel="stylesheet" type="text/css"/>
-
-    <link href="/admin/css/fullcalendar.css" rel="stylesheet" type="text/css"/>
-
-    <link href="/admin/css/jqvmap.css" rel="stylesheet" type="text/css" media="screen"/>
-
-    <link href="/admin/css/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" media="screen"/>
-
-    <!-- END PAGE LEVEL STYLES -->
+    {{{ _sections.pagelevelstyles }}}
 
     <link rel="shortcut icon" href="/admin/image/favicon.ico"/>
 
-    {{{ _sections.header }}}
 
 </head>
 
@@ -140,6 +127,18 @@
 <!-- END CONTAINER -->
 
 {{> adminfooter }}
+
+{{{ _sections.pagelevelscripts}}}
+
+<script>
+
+    jQuery(document).ready(function() {
+
+        App.init(); // initlayout and core plugins
+
+    });
+
+</script>
 
 {{{ _sections.footer }}}
 

@@ -1,111 +1,12 @@
-<!--<div class="row-fluid">-->
+{{#section 'pagelevelstyles'}}
+<!-- BEGIN PAGE LEVEL STYLES -->
 
-    <!--<div class="span12">-->
+<link rel="stylesheet" type="text/css" href="/admin/css/select2_metro.css" />
 
-        <!--&lt;!&ndash; BEGIN SAMPLE FORM PORTLET&ndash;&gt;-->
+<link rel="stylesheet" type="text/css" href="/admin/css/chosen.css" />
 
-        <!--<div class="portlet box blue">-->
-
-            <!--<div class="portlet-title">-->
-
-                <!--<div class="caption"><i class="icon-reorder"></i>项目表单</div>-->
-
-            <!--</div>-->
-
-            <!--<div class="portlet-body form">-->
-
-                <!--&lt;!&ndash; BEGIN FORM&ndash;&gt;-->
-
-                <!--<form action="#" id="form_sample_1" class="form-horizontal">-->
-
-                    <!--<div class="control-group">-->
-
-                        <!--<label class="control-label">项目名称<span class="required">*</span></label>-->
-
-                        <!--<div class="controls">-->
-
-                            <!--<input type="text" name="name" data-required="1" class="span6 m-wrap"/>-->
-
-                        <!--</div>-->
-
-                    <!--</div>-->
-                    <!--<div class="control-group">-->
-
-                        <!--<label class="control-label">部门</label>-->
-
-                        <!--<div class="controls">-->
-
-                            <!--<select class="span6 m-wrap" data-placeholder="Choose a Category" tabindex="1">-->
-
-                                <!--<option value="">请选择玻门</option>-->
-                                <!--<option value="客服一部">客服一部</option>-->
-                                <!--<option value="客服二部">客服二部</option>-->
-                                <!--<option value="客服三部">客服三部</option>-->
-                                <!--<option value="客服四部">客服四部</option>-->
-                                <!--<option value="客服五部">客服五部</option>-->
-                                <!--<option value="客服六部">客服六部</option>-->
-                                <!--<option value="客服七部">客服七部</option>-->
-                                <!--<option value="客服八部">客服八部</option>-->
-                                <!--<option value="客服九部">客服九部</option>-->
-
-                            <!--</select>-->
-
-                        <!--</div>-->
-
-                    <!--</div>-->
-                    <!--<div class="control-group">-->
-
-                        <!--<label class="control-label">项目URL</label>-->
-
-                        <!--<div class="controls">-->
-
-                            <!--<input type="text" class="span6 m-wrap" />-->
-
-                            <!--<span class="help-inline">请输入项目完整URL</span>-->
-
-                        <!--</div>-->
-
-                    <!--</div>-->
-                    <!--<div class="control-group">-->
-
-                        <!--<label class="control-label">状态</label>-->
-
-                        <!--<div class="controls">-->
-
-                            <!--<select class="span6 m-wrap" data-placeholder="Choose a Category" tabindex="1">-->
-
-                                <!--<option value="">请选择状态</option>-->
-                                <!--<option value="0">启用</option>-->
-                                <!--<option value="-1">停用</option>-->
-                            <!--</select>-->
-
-                        <!--</div>-->
-
-                    <!--</div>-->
-
-                    <!--<div class="form-actions">-->
-
-                        <!--<button type="submit" class="btn purple">Validate</button>-->
-
-                        <!--<button type="button" class="btn">Cancel</button>-->
-
-                    <!--</div>-->
-
-                <!--</form>-->
-
-
-                <!--&lt;!&ndash; END FORM&ndash;&gt;-->
-
-            <!--</div>-->
-
-        <!--</div>-->
-
-        <!--&lt;!&ndash; END SAMPLE FORM PORTLET&ndash;&gt;-->
-
-    <!--</div>-->
-
-<!--</div>-->
-
+<!-- END PAGE LEVEL STYLES -->
+{{/section}}
 
 <div class="row-fluid">
 
@@ -212,8 +113,38 @@
     </div>
 
 </div>
+{{#section 'pagelevelscripts'}}
+<!-- BEGIN PAGE LEVEL PLUGINS -->
+
+<script type="text/javascript" src="/admin/js/jquery.validate.min.js"></script>
+
+<script type="text/javascript" src="/admin/js/additional-methods.min.js"></script>
+
+<script type="text/javascript" src="/admin/js/select2.min.js"></script>
+
+<script type="text/javascript" src="/admin/js/chosen.jquery.min.js"></script>
+
+<!-- END PAGE LEVEL PLUGINS -->
+
+<!-- BEGIN PAGE LEVEL STYLES -->
+
+<script src="/admin/js/app.js"></script>
+
+<script src="/admin/js/form-validation.js"></script>
+
+<!-- END PAGE LEVEL STYLES -->
+
+{{/section}}
+
+
 {{#section 'footer'}}
 <script>
+    jQuery(document).ready(function() {
+
+        FormValidation.init();
+
+    });
+
     $("#submitform").click(function() {
         var data = $("#project-form").serialize();
         $.ajax({

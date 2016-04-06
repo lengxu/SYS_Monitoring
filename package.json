@@ -6,6 +6,7 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "bunyan": "^1.8.0",
     "co": "^4.6.0",
     "co-redis": "^2.1.0",
     "co-wechat-api": "^2.3.1",
