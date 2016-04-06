@@ -17,9 +17,9 @@ exports.showadd=function* () {
     });
 }
 exports.doadd = function*() {
-
+    console.log('ceshi');
     var  info= this.request.body;
-
+    console.log(info);
     var project = new ProjectModel(info);
 
     yield thunkify(project.save,project);

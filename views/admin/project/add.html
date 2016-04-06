@@ -125,7 +125,7 @@
 
                 <!-- BEGIN FORM-->
 
-                <form action="#" id="form_sample_1" class="form-horizontal">
+                <form action="#" id="project-form" class="form-horizontal">
 
 
                     <div class="control-group">
@@ -212,18 +212,19 @@
     </div>
 
 </div>
+{{#section 'footer'}}
 <script>
     $("#submitform").click(function() {
-        alert(1);
-        var data = $(".project-form").serialize();
+        var data = $("#project-form").serialize();
         $.ajax({
             url: '/sysadmin/project/doadd',
             type: 'post',
             data: data,
             success: function(data,status){
-                if(status == 'success'){
-                    location.href = '/sysadmin/project/';
-                }
+                alert(2);
+//                if(status == 'success'){
+//                    location.href = '/sysadmin/project/';
+//                }
             },
             error: function(data,err){
                 location.href = '/sysadmin/project/';
@@ -232,4 +233,4 @@
     });
 
 </script>
-
+{{/section}}
