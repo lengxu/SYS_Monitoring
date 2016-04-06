@@ -2,15 +2,15 @@
 
 var koa = require('koa'),
     Router = require('koa-router'),
-    // logger = require('koa-logger'),
+// logger = require('koa-logger'),
     json = require('koa-json'),
     views = require('koa-views'),
-    //render = require('koa-ejs'),
+//render = require('koa-ejs'),
     handlebars = require("koa-handlebars"),
     path = require('path'),
     onerror = require('koa-onerror'),
     session = require('koa-generic-session'),
- koaBunyanLogger = require('koa-bunyan-logger'),
+    koaBunyanLogger = require('koa-bunyan-logger'),
     sessionStore = require('koa-session-mongoose');
 
 var response = require('./lib/middlewares/response'),
@@ -18,7 +18,7 @@ var response = require('./lib/middlewares/response'),
     siteRoutes = require('./routes'),
     adminRoutes = require('./routes_sysadmin'),
     config = require('./config'),
-    eventstrategy=require('./lib/eventstrategy/index'),
+    eventstrategy = require('./lib/eventstrategy/index'),
     wechatRoutes = require('./routes_wechat');
 
 let app = koa();
@@ -41,7 +41,6 @@ app.use(function*(next) {
 })
 
 
-
 // render(app, {
 //     root: path.join(__dirname, 'views'),
 //     layout: 'template',
@@ -52,18 +51,18 @@ app.use(function*(next) {
 
 // handlebars templating
 app.use(handlebars({
-    extension:   ['html', 'handlebars'],
+    extension: ['html', 'handlebars'],
     defaultLayout: "layout.html",
-    viewsDir:    'views',
+    viewsDir: 'views',
     partialsDir: 'views/partials',
-    layoutsDir:"views/layouts",
+    layoutsDir: "views/layouts",
     helpers: {
-        section: function(name, options){
-            if(!this._sections) this._sections = {};
+        section: function (name, options) {
+            if (!this._sections) this._sections = {};
             this._sections[name] = options.fn(this);
             return null;
         },
-        static: function(name) {
+        static: function (name) {
             return require('./lib/static.js').map(name);
         }
     }
@@ -97,8 +96,7 @@ adminRoutes(adminRouter);
 wechatRoutes(wechatRouter);
 
 
-
-app.on('error', function(err, ctx) {
+app.on('error', function (err, ctx) {
     log.error('server error', err, ctx);
 });
 
