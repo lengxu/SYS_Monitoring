@@ -5,7 +5,7 @@ var adminbaserender = require('../../lib/middlewares/adminbaserender');
 
 //登录
 exports.index = function *() {
-    yield adminbaserender(this, "admin/home", {
-        title: 'home'
+    yield adminbaserender(this,"admin/index", {
+        title: '后台首页'
     });
 }

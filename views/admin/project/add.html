@@ -8,6 +8,7 @@
 <!-- END PAGE LEVEL STYLES -->
 {{/section}}
 
+
 <div class="row-fluid">
 
     <div class="span12">
@@ -28,6 +29,20 @@
 
                 <form action="#" id="project-form" class="form-horizontal">
 
+                    <div class="alert alert-error hide">
+
+                        <button class="close" data-dismiss="alert"></button>
+                        You have some form errors. Please check below.
+
+                    </div>
+
+                    <div class="alert alert-success hide">
+
+                        <button class="close" data-dismiss="alert"></button>
+
+                        Your form validation is successful!
+
+                    </div>
 
                     <div class="control-group">
 
@@ -40,63 +55,85 @@
                         </div>
 
                     </div>
+
                     <div class="control-group">
 
-                        <label class="control-label">部门</label>
+                        <label class="control-label">部门<span class="required">*</span></label>
 
                         <div class="controls">
 
-                            <select class="span6 m-wrap" data-placeholder="Choose a Category" tabindex="1">
+                            <select class="span6 m-wrap" name="department">
 
-                                <option value="">请选择玻门</option>
-                                <option value="客服一部">客服一部</option>
-                                <option value="客服二部">客服二部</option>
-                                <option value="客服三部">客服三部</option>
-                                <option value="客服四部">客服四部</option>
-                                <option value="客服五部">客服五部</option>
-                                <option value="客服六部">客服六部</option>
-                                <option value="客服七部">客服七部</option>
-                                <option value="客服八部">客服八部</option>
-                                <option value="客服九部">客服九部</option>
+                            <option value="">请选择部门</option>
+                            <option value="客服一部">客服一部</option>
+                            <option value="客服二部">客服二部</option>
+                            <option value="客服三部">客服三部</option>
+                            <option value="客服四部">客服四部</option>
+                            <option value="客服五部">客服五部</option>
+                            <option value="客服六部">客服六部</option>
+                            <option value="客服七部">客服七部</option>
+                            <option value="客服八部">客服八部</option>
+                            <option value="客服九部">客服九部</option>
 
                             </select>
 
                         </div>
 
                     </div>
+
                     <div class="control-group">
 
-                        <label class="control-label">项目URL</label>
+                        <label class="control-label">项目URL<span class="required">*</span></label>
 
                         <div class="controls">
 
-                            <input type="text" name="siteurl" class="span6 m-wrap" />
+                            <input name="siteurl" type="text" class="span6 m-wrap"/>
 
-                            <span class="help-inline">请输入项目完整URL</span>
+                            <span class="help-block">e.g: http://www.demo.com or http://demo.com</span>
 
                         </div>
 
                     </div>
+
                     <div class="control-group">
 
-                        <label class="control-label">状态</label>
+                        <label class="control-label">状态<span class="required">*</span></label>
 
                         <div class="controls">
 
-                            <select class="span6 m-wrap" data-placeholder="Choose a Category" tabindex="1">
+                            <select class="span6 m-wrap" name="status">
 
-                                <option value="">请选择状态</option>
-                                <option value="0">启用</option>
-                                <option value="-1">停用</option>
+                            <option value="">请选择状态</option>
+                            <option value="0">启用</option>
+                            <option value="-1">停用</option>
                             </select>
 
                         </div>
 
                     </div>
+
+                    <div class="control-group">
+
+                        <label class="control-label">监测开始时间<span class="required">*</span></label>
+
+                        <div class="controls">
+
+                            <div class="input-append date date-picker" data-date="2012-02-12" data-date-format="yyyy-mm-dd" data-date-viewmode="years">
+
+                                <input name="starttime" class="m-wrap m-ctrl-medium date-picker" readonly size="16" type="text" value="" /><span class="add-on"><i class="icon-calendar"></i></span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
 
                     <div class="form-actions">
 
-                        <button type="button" id="submitform" class="btn purple">提交</button>
+                        <button type="submit" id="submitform1" class="btn purple">保存</button>
+
+                        <button type="button" class="btn">取消</button>
 
                     </div>
 
@@ -113,7 +150,10 @@
     </div>
 
 </div>
+
 {{#section 'pagelevelscripts'}}
+
+
 <!-- BEGIN PAGE LEVEL PLUGINS -->
 
 <script type="text/javascript" src="/admin/js/jquery.validate.min.js"></script>
@@ -132,6 +172,11 @@
 
 <script src="/admin/js/form-validation.js"></script>
 
+<script type="text/javascript" src="/admin/js/bootstrap-datepicker.js"></script>
+
+<script src="/admin/js/form-components.js"></script>
+
+
 <!-- END PAGE LEVEL STYLES -->
 
 {{/section}}
@@ -143,24 +188,8 @@
 
         FormValidation.init();
 
-    });
+        FormComponents.init();
 
-    $("#submitform").click(function() {
-        var data = $("#project-form").serialize();
-        $.ajax({
-            url: '/sysadmin/project/doadd',
-            type: 'post',
-            data: data,
-            success: function(data,status){
-                alert(2);
-//                if(status == 'success'){
-//                    location.href = '/sysadmin/project/';
-//                }
-            },
-            error: function(data,err){
-                location.href = '/sysadmin/project/';
-            }
-        });
     });
 
 </script>
