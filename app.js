@@ -11,6 +11,9 @@ var koa = require('koa'),
     onerror = require('koa-onerror'),
     session = require('koa-generic-session'),
     koaBunyanLogger = require('koa-bunyan-logger'),
+    //paginate = require("koa-paginate"),
+    //  paginateHelper = require('handlebars-helper-paginate'),
+    paginateHelper = require('express-handlebars-paginate'),
     sessionStore = require('koa-session-mongoose');
 
 var response = require('./lib/middlewares/response'),
@@ -39,7 +42,14 @@ app.use(function*(next) {
     var ms = new Date - start;
     console.log('%s %s - %s', this.method, this.url, ms);
 })
-
+//
+// // add middleware
+// app.use(paginate.middleware({
+//     // in case the limit is null
+//     defaultLimit: config.paginate.defaultLimit,
+//     // throws an error when exceeded
+//     maxLimit: config.paginate.maxLimit
+// }));
 
 // render(app, {
 //     root: path.join(__dirname, 'views'),
@@ -64,9 +74,12 @@ app.use(handlebars({
         },
         static: function (name) {
             return require('./lib/static.js').map(name);
-        }
+        },
+        paginateHelper:paginateHelper.createPagination
     }
 }));
+
+// handlebars.helper('paginateHelper', paginateHelper.register);
 
 app.keys = ['koa', 'nodedb'];
 

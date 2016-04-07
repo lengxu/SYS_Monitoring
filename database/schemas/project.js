@@ -1,6 +1,8 @@
 "use strict";
 
-let mongoose = require('mongoose');
+let mongoose = require('mongoose'),
+    koamongoosePagination = require('koa-mongoose-pagination');
+
 
 /*
  *   name:项目名称
@@ -27,6 +29,8 @@ ProjectSchema.statics = {
     }
 
 };
+
+ProjectSchema.plugin(koamongoosePagination);
 
 module.exports = ProjectSchema;
 
