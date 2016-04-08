@@ -111,6 +111,11 @@ config.ip = {
     blackList: ['144.144.*']
 }
 
+config.paginate=
+{
+    resultsPerPage:10
+}
+
 
 //事件机制
 config.event = {

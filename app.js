@@ -79,8 +79,6 @@ app.use(handlebars({
     }
 }));
 
-// handlebars.helper('paginateHelper', paginateHelper.register);
-
 app.keys = ['koa', 'nodedb'];
 
 app.use(session({
