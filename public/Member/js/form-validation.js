@@ -5,10 +5,10 @@ var FormValidation = function () {
         //main function to initiate the module
         init: function () {
 
-            // for more info visit the official plugin documentation: 
+            // for more info visit the official plugin documenta®tion: 
             // http://docs.jquery.com/Plugins/Validation
 
-            var form1 = $('#project-form');
+            var form1 = $('#info-form');
             var error1 = $('.alert-error', form1);
             var success1 = $('.alert-success', form1);
 
@@ -18,22 +18,17 @@ var FormValidation = function () {
                 focusInvalid: false, // do not focus the last invalid input
                 ignore: "",
                 rules: {
-                    name: {
-                        minlength: 5,
-                        required: true
-                    },
-                    department: {
-                        required: true
-                    },
-                    siteurl: {
+                    tel: {
                         required: true,
-                        url: true
+                        tel: true
                     },
-                    status: {
+                    ext: {
+                        number: true,
                         required: true
                     },
-                    starttime: {
-                        required: true
+                    email: {
+                        required: true,
+                        email: true
                     }
                 },
 
@@ -58,25 +53,28 @@ var FormValidation = function () {
                 success: function (label) {
                     label
                         .addClass('valid').addClass('help-inline ok') // mark the current input as valid and display OK icon
-                    .closest('.control-group').removeClass('error').addClass('success'); // set success class to the control group
+                        .closest('.control-group').removeClass('error').addClass('success'); // set success class to the control group
                 },
 
                 submitHandler: function (form) {
+                    alert('1');
+
                     success1.show();
                     error1.hide();
-                    var data = $("#project-form").serialize();
+                    var data = $("#info-form").serialize();
+
                     $.ajax({
-                        url: '/sysadmin/project/doadd',
+                        url: '/member/info/doadd',
                         type: 'post',
                         data: data,
-                        success: function(data,status){
+                        success: function (data, status) {
                             alert('保存成功');
-                            if(status == 'success'){
-                                location.href = '/sysadmin/project/';
+                            if (status == 'success') {
+                                location.href = '/member/project/';
                             }
                         },
-                        error: function(data,err){
-                            location.href = '/sysadmin/project/';
+                        error: function (data, err) {
+                            location.href = '/member/project/';
                         }
                     });
                 }

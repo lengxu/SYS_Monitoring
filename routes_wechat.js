@@ -44,6 +44,8 @@ module.exports = function (router) {
 
     router.get('/member/project/:id?/detail', wechatoauth.infoview(), project.detail);
     router.get('/member/info/add', wechatoauth.view(), member.showadd);
+    router.get('/member/info/doadd', wechatoauth.api(), member.doadd);
+
 
 
 

@@ -15,9 +15,11 @@ exports.showadd = function*() {
 exports.doadd = function*() {
     var info = this.request.body;
 
-    var wechatuser = new WechatUserModel(info);
+    var wechatuser = this.session.wechatUserInfo;
 
-    yield thunkify(project.save, project);
+    wechatuser.userinf=info;
+
+    yield thunkify(wechatuser.save, wechatuser);
 
     this.send(null, 0, "保存成功");
 

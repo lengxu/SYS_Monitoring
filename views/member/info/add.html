@@ -1,0 +1,141 @@
+{{#section 'pagelevelstyles'}}
+<!-- BEGIN PAGE LEVEL STYLES -->
+
+<link rel="stylesheet" type="text/css" href="/member/css/select2_metro.css" />
+
+<link rel="stylesheet" type="text/css" href="/member/css/chosen.css" />
+
+<!-- END PAGE LEVEL STYLES -->
+{{/section}}
+
+
+<div class="row-fluid">
+
+    <div class="span12">
+
+        <!-- BEGIN VALIDATION STATES-->
+
+        <div class="portlet box purple">
+
+            <div class="portlet-title">
+
+                <div class="caption"><i class="icon-reorder"></i>完善用户信息</div>
+
+            </div>
+
+            <div class="portlet-body form">
+
+                <!-- BEGIN FORM-->
+
+                <form action="" id="info-form" class="form-horizontal">
+
+                    <div class="alert alert-error hide">
+
+                        <button class="close" data-dismiss="alert"></button>
+                        You have some form errors. Please check below.
+
+                    </div>
+
+                    <div class="alert alert-success hide">
+
+                        <button class="close" data-dismiss="alert"></button>
+
+                        Your form validation is successful!
+
+                    </div>
+
+                    <div class="control-group">
+
+                        <label class="control-label">手机号<span class="required">*</span></label>
+
+                        <div class="controls">
+
+                            <input type="text" name="tel" data-required="1" class="span6 m-wrap"/>
+
+                        </div>
+
+                    </div>
+
+                    <div class="control-group">
+
+                        <label class="control-label">分机号<span class="required">*</span></label>
+
+                        <div class="controls">
+
+                            <input type="text" name="ext" data-required="1" class="span6 m-wrap"/>
+
+                        </div>
+
+                    </div>
+
+                    <div class="control-group">
+
+                        <label class="control-label">Email<span class="required">*</span></label>
+
+                        <div class="controls">
+
+                            <input name="email" type="text" class="span6 m-wrap"/>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="form-actions">
+
+                        <button type="submit" id="submitform1" class="btn purple">保存</button>
+
+                        <button type="button" class="btn">取消</button>
+
+                    </div>
+
+                </form>
+
+                <!-- END FORM-->
+
+            </div>
+
+        </div>
+
+        <!-- END VALIDATION STATES-->
+
+    </div>
+
+</div>
+
+{{#section 'pagelevelscripts'}}
+
+
+<!-- BEGIN PAGE LEVEL PLUGINS -->
+
+<script type="text/javascript" src="/member/js/jquery.validate.min.js"></script>
+
+<script type="text/javascript" src="/member/js/additional-methods.min.js"></script>
+
+<script type="text/javascript" src="/member/js/select2.min.js"></script>
+
+<script type="text/javascript" src="/member/js/chosen.jquery.min.js"></script>
+
+<!-- END PAGE LEVEL PLUGINS -->
+
+<!-- BEGIN PAGE LEVEL STYLES -->
+
+<script src="/member/js/form-validation.js"></script>
+
+
+<!-- END PAGE LEVEL STYLES -->
+
+{{/section}}
+
+
+{{#section 'footer'}}
+<script>
+    jQuery(document).ready(function() {
+
+        FormValidation.init();
+
+    });
+
+</script>
+{{/section}}
