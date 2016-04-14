@@ -43,18 +43,18 @@ exports.callback = function*() {
 
     if (result) {
 
-        wechatuser.updatetime = new Date().toFormat("YYYY-MM-DD HH24:MI:SS");
+        result.updatetime = new Date().toFormat("YYYY-MM-DD HH24:MI:SS");
 
-        this.session.wechatUserInfo = wechatuser;
+        this.session.wechatUserInfo = result;
 
-        result = yield thunkify(result.update, result)(wechatuser);
+        result = yield thunkify(result.update, result)(result);
 
         if (info.returnurl && info.returnurl != '') {
 
             this.redirect(info.returnurl);
 
         } else {
-            this.body = wechatuser;
+            this.body = result;
         }
 
         return;
@@ -83,7 +83,7 @@ exports.settestlogin = function*() {
 
     if (result) {
 
-        wechatuser.updatetime = new Date().toFormat("YYYY-MM-DD HH24:MI:SS");
+        result.updatetime = new Date().toFormat("YYYY-MM-DD HH24:MI:SS");
 
         this.session.wechatUserInfo = wechatuser;
 
