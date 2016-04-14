@@ -4,12 +4,12 @@ var thunkify = require('thunkify-wrap');
 var OAuth = require('co-wechat-oauth');
 let config = require('../config');
 var client = new OAuth(config.wechatinfo.appid, config.wechatinfo.appsecret);
-var baserender=require('../lib/middlewares/baserender');
+var baserender = require('../lib/middlewares/baserender');
 
 
 //登录
 exports.getwechatlogin = function*() {
-    yield baserender(this,"wechatlogin", {
+    yield baserender(this, "wechatlogin", {
         title: 'wechatlogin',
         returnurl: this.query['returnurl']
     });

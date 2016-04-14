@@ -69,3 +69,40 @@ exports.callback = function*() {
     this.session.wechatUserInfo = wechatuser;
 
 }
+
+
+
+exports.settestlogin = function*() {
+
+    var wechatuser = new WechatUserModel();
+
+    wechatuser.openid = 'testopenid';
+
+    //检查是否存在该用户
+    var result = yield thunkify(WechatUserModel.findByOpenID, WechatUserModel)(wechatuser.openid);
+
+    console.log(result);
+    if (result) {
+
+        wechatuser.updatetime = new Date().toFormat("YYYY-MM-DD HH24:MI:SS");
+
+        this.session.wechatUserInfo = wechatuser;
+
+        // result = yield thunkify(result.update, result)(wechatuser);
+
+    }
+    else {
+
+        wechatuser = new WechatUserModel(wechatuser);
+
+        yield thunkify(new WechatUserModel(wechatuser).save, wechatuser);
+
+        this.body = wechatuser;
+
+        this.session.wechatUserInfo = wechatuser;
+    }
+
+    this.body = '模拟登录成功';
+
+
+}
