@@ -78,6 +78,9 @@ exports.settestlogin = function*() {
 
     wechatuser.openid = 'testopenid1';
 
+    wechatuser.nickname = 'testnickname';
+
+
     //检查是否存在该用户
     var result = yield thunkify(WechatUserModel.findByOpenID, WechatUserModel)(wechatuser.openid);
 

@@ -6,8 +6,10 @@ var wechatqrcode = require('./routes/wechat/qrcode');
 var wechatgroup = require('./routes/wechat/group');
 var wechatip = require('./routes/wechat/ip');
 var project = require('./routes/member/project/index');
+var member = require('./routes/member/info/index');
 var auth = require('./lib/middlewares/auth');
 var wechatoauth = require('./lib/middlewares/wechatoauth');
+
 
 
 module.exports = function (router) {
@@ -36,8 +38,14 @@ module.exports = function (router) {
     //api_ip:
     router.get('/wechat/ip/getIp', wechatip.getIp);
 
-    router.get('/member/project/:id?/detail', wechatoauth.view(), project.detail)
+//未登陆pc端查看
+    router.get('/project/:id?/detail',  project.detail);
 
-    router.get('/project/:id?/detail', wechatoauth.view(), project.detail)
+
+    router.get('/member/project/:id?/detail', wechatoauth.infoview(), project.detail);
+    router.get('/member/info/add', wechatoauth.view(), member.showadd);
+
+
+
 
 }
