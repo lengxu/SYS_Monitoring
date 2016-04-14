@@ -75,6 +75,8 @@
 
                         <th class="hidden-480">是否开启</th>
 
+                        <th >操作</th>
+
                     </tr>
 
                     </thead>
@@ -85,7 +87,7 @@
 
                         <td>{{name}}</td>
 
-                        <td>{{lastmonitorstatus}}</td>
+                        <td>{{GetMonitortingStatus}}</td>
 
                         <td class="hidden-480">{{department}}</td>
 
@@ -93,7 +95,9 @@
 
                         <td class="hidden-480">{{lastmonitortime}}</td>
 
-                        <td class="hidden-480">{{status}}</td>
+                        <td class="hidden-480">{{GetStatus}}</td>
+
+                        <td ><a href="/project/{{_id}}/detail" target="_blank">打开项目</a></td>
 
                     </tr>
                     {{/items}}
