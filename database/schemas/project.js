@@ -26,6 +26,10 @@ ProjectSchema.statics = {
 
     findByName: function (name, cb) {
         return this.findOne({name: name}, cb);
+    },
+
+    findByid: function (id, cb) {
+        return this.findOne({_id: id}, cb);
     }
 
 };
@@ -64,10 +68,6 @@ ProjectSchema.methods.GetMonitortingStatus = function () {
         return '未知状态';
     }
 };
-
-// Schema.method('GetStatus', function () {
-//     return 'sdfdf'
-// });
 
 
 ProjectSchema.plugin(koamongoosePagination);

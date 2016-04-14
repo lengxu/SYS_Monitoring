@@ -8,8 +8,14 @@ var baserender = require('../../lib/middlewares/baserender'),
 
 //项目列表
 exports.detail = function*() {
-    console.log(this.request.query);
+    let info = this.params;
+
+    var result = yield thunkify(ProjectModel.findByid, ProjectModel)(info.id);
+
     yield baserender(this, "project/detail", {
-        title: '项目详情'
+        title: '项目详情',
+
+        info:result
+
     });
 }
