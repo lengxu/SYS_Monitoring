@@ -74,11 +74,13 @@ exports.callback = function*() {
 
 exports.settestlogin = function*() {
 
+    let info = this.query;
+
     var wechatuser = new WechatUserModel();
 
-    wechatuser.openid = 'testopenid1';
+    wechatuser.openid = info.openid||'testopenid1';
 
-    wechatuser.nickname = 'testnickname';
+    wechatuser.nickname = info.nickname||'testnickname';
 
 
     //检查是否存在该用户

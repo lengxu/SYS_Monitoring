@@ -1,6 +1,7 @@
 "use strict";
 
 let mongoose = require('mongoose'),
+    Schema=mongoose.Schema,
     koamongoosePagination = require('koa-mongoose-pagination');
 
 
@@ -11,7 +12,6 @@ let mongoose = require('mongoose'),
  *
  *
  */
-
 let ProjectSchema = new mongoose.Schema({
     name: {type: String},
     department: {type: String},
@@ -19,7 +19,15 @@ let ProjectSchema = new mongoose.Schema({
     status: {type: Number, default: -1},
     starttime: {type: Date},
     lastmonitortime: {type: Date},
-    lastmonitorstatus: {type: Number}
+    lastmonitorstatus: {type: Number},
+    //参与人员列表
+    // participants: [String]
+    participants: [{
+        // _wechatuserobjectid: {type: Schema.Types.ObjectId, ref: 'WechatUser'},
+        // _wechatuserobjectid: {type:String},
+        _id:{type: Schema.Types.ObjectId, ref: 'WechatUser'},
+        status: {type: Number, default: -1}
+    }]
 });
 
 ProjectSchema.statics = {
@@ -30,23 +38,25 @@ ProjectSchema.statics = {
 
     findByid: function (id, cb) {
         return this.findOne({_id: id}, cb);
+    },
+
+    updateParticipants: function (id,participants, cb) {
+        return this.update({_id: id}, {$addToSet: {participants: participants}}, cb);
     }
 
 };
 
 ProjectSchema.methods.GetStatus = function () {
-    
-    if (this.status==0)
-    {
+
+    if (this.status == 0) {
 
         return '已启用';
     }
-    else if(this.status==-1)
-    {
+    else if (this.status == -1) {
 
         return '未启用';
     }
-    else{
+    else {
         return '未知状态';
     }
 };
@@ -54,17 +64,15 @@ ProjectSchema.methods.GetStatus = function () {
 
 ProjectSchema.methods.GetMonitortingStatus = function () {
 
-    if (this.lastmonitorstatus==0)
-    {
+    if (this.lastmonitorstatus == 0) {
 
         return '正常';
     }
-    else if(this.lastmonitorstatus==-1)
-    {
+    else if (this.lastmonitorstatus == -1) {
 
         return '出错';
     }
-    else{
+    else {
         return '未知状态';
     }
 };

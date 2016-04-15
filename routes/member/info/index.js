@@ -18,11 +18,10 @@ exports.doadd = function*() {
     var wechatuser = this.session.wechatUserInfo;
 
     wechatuser.userinf=info;
+    
+    wechatuser.userinf.updatetime=new Date().toFormat("YYYY-MM-DD HH24:MI:SS");
 
-    console.log('1111111111111111111');
     yield thunkify(WechatUserModel.updateUserInfoByOpenID,WechatUserModel)(wechatuser.openid,info);
-    console.log('22222222222222222222');
-    // yield thunkify(wechatuser.save, wechatuser);
 
     this.send(null, 0, "保存成功");
 

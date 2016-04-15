@@ -41,7 +41,7 @@ module.exports = function (router) {
 //未登陆pc端查看
     router.get('/project/:id?/detail',  project.detail);
 
-
+    router.get('/member/project/', wechatoauth.infoview(), project.showindex);
     router.get('/member/project/:id?/detail', wechatoauth.infoview(), project.detail);
     router.get('/member/info/add', wechatoauth.view(), member.showadd);
     router.post('/member/info/doadd', wechatoauth.api(), member.doadd);
