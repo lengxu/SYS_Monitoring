@@ -21,7 +21,7 @@ var WechatUserSchema = new mongoose.Schema({
         tel: {type: String},
         ext: {type: String},
         email: {type: String},
-        updatetime:{type:Date}
+        updatetime: {type: Date}
     }
 });
 
@@ -29,8 +29,10 @@ WechatUserSchema.statics = {
 
     findByOpenID: function (openid, cb) {
         return this.findOne({openid: openid}, cb);
+    },
+    updateUserInfoByOpenID: function (openid, userinfo, cb) {
+        return this.update({openid: openid}, {$set: {userinfo: userinfo}}, cb);
     }
-
 };
 
 module.exports = WechatUserSchema;

@@ -19,7 +19,10 @@ exports.doadd = function*() {
 
     wechatuser.userinf=info;
 
-    yield thunkify(wechatuser.save, wechatuser);
+    console.log('1111111111111111111');
+    yield thunkify(WechatUserModel.updateUserInfoByOpenID,WechatUserModel)(wechatuser.openid,info);
+    console.log('22222222222222222222');
+    // yield thunkify(wechatuser.save, wechatuser);
 
     this.send(null, 0, "保存成功");
 

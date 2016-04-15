@@ -19,8 +19,7 @@ var FormValidation = function () {
                 ignore: "",
                 rules: {
                     tel: {
-                        required: true,
-                        tel: true
+                        required: true
                     },
                     ext: {
                         number: true,
