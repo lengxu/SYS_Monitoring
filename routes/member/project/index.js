@@ -1,11 +1,12 @@
 'use strict';
 
-var ProjectModel = require('../../../viewmodels/project');
+var ProjectModel = require('../../../viewmodels/project'),
+    WechatUserModel = require('../../../viewmodels/wechatuser');
 var thunkify = require('thunkify-wrap');
 var baserender = require('../../../lib/middlewares/baserender'),
     mongoose = require('mongoose'),
     koaMongoosePagination = require('koa-mongoose-pagination'),
-    Schema=mongoose.Schema,
+    Schema = mongoose.Schema,
     config = require('../../../config');
 
 
@@ -23,6 +24,14 @@ exports.showindex = function*() {
         offset: (currentPage * resultsPerPage) - resultsPerPage
     });
     console.log(result.data[0].participants);
+
+
+    var wxUsers = result.data[0].participants.map(function (item) {
+        console.log(item._id);
+        return yield thunkify(WechatUserModel.findByID, WechatUserModel)(item._id);
+
+    });
+    console.log(wxUsers);
 
     yield baserender(this, "member/project/index", {
         title: '我的项目',
@@ -45,12 +54,6 @@ exports.detail = function*() {
     );
 
 
-    var wxUsers = result.data.participants.map(function (item) {
-        return {
-            
-        }
-    });
-    console.log(result);
 
     yield baserender(this, "member/project/detail", {
         title: '项目详情',
