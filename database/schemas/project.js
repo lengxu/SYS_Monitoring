@@ -60,7 +60,6 @@ ProjectSchema.statics = {
 };
 
 ProjectSchema.methods.GetStatus = function () {
-
     if (this.status == 0) {
 
         return '已启用';

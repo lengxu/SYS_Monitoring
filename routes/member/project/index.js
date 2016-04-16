@@ -39,7 +39,12 @@ exports.detail = function*() {
     let info = this.params;
 
     var result = yield thunkify(ProjectModel.findByidAndUserID, ProjectModel)(info.id, this.session.wechatUserInfo._id);
-    console.log(result);
+
+
+    var projectinfo=yield thunkify(ProjectModel.findByid, ProjectModel)(info.id);
+
+
+    console.log(projectinfo);
     if (result && result.participants[0].status == -1) {
         this.body = '你的申请还未审批';
     }
@@ -47,7 +52,7 @@ exports.detail = function*() {
         yield baserender(this, "member/project/detail", {
             title: '项目详情',
 
-            info: result
+            projectinfo: projectinfo
 
         });
     }
@@ -55,7 +60,7 @@ exports.detail = function*() {
         yield baserender(this, "member/project/apply", {
             title: '请先申请,等待审批',
 
-            info: result
+            projectinfo: projectinfo
 
         });
     }
