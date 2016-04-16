@@ -7,6 +7,8 @@ var baserender = require('../../../lib/middlewares/baserender'),
     mongoose = require('mongoose'),
     koaMongoosePagination = require('koa-mongoose-pagination'),
     Schema = mongoose.Schema,
+    co = require('co'),
+
     config = require('../../../config');
 
 
@@ -23,16 +25,8 @@ exports.showindex = function*() {
         limit: resultsPerPage,
         offset: (currentPage * resultsPerPage) - resultsPerPage
     });
-    console.log(result.data[0].participants);
 
-
-    var wxUsers = result.data[0].participants.map(function (item) {
-        console.log(item._id);
-        return yield thunkify(WechatUserModel.findByID, WechatUserModel)(item._id);
-
-    });
-    console.log(wxUsers);
-
+    // var result2=yield thunkify(ProjectModel.populatedata, ProjectModel)(result.data);
     yield baserender(this, "member/project/index", {
         title: '我的项目',
         totalRows: result.count,
@@ -45,6 +39,7 @@ exports.detail = function*() {
     let info = this.params;
 
     var result = yield thunkify(ProjectModel.findByid, ProjectModel)(info.id);
+    console.log(result);
 
     result = yield thunkify(ProjectModel.updateParticipants, ProjectModel)(result._id,
         {
@@ -52,7 +47,6 @@ exports.detail = function*() {
             'status': -1
         }
     );
-
 
 
     yield baserender(this, "member/project/detail", {

@@ -37,11 +37,18 @@ ProjectSchema.statics = {
     },
 
     findByid: function (id, cb) {
-        return this.findOne({_id: id}, cb);
+        var result= this.findOne({_id: id})
+
+            return result.populate('participants._id').exec(cb);
     },
 
     updateParticipants: function (id,participants, cb) {
         return this.update({_id: id}, {$addToSet: {participants: participants}}, cb);
+    },
+    populatedata:function (data,cb) {
+
+        console.log(data);
+        return data[0].populate(('participants._id'),cb);
     }
 
 };
