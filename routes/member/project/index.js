@@ -69,10 +69,9 @@ exports.detail = function*() {
 
 //提交申请
 exports.doapply = function*() {
+    
     var info = this.request.body;
-
     var result = yield thunkify(ProjectModel.findByidAndUserID, ProjectModel)(info.id, this.session.wechatUserInfo._id);
-    console.log(result);
     if (result && result.participants[0].status == -1) {
 
         this.send(null, 0, "你的申请还未审批");
@@ -83,8 +82,9 @@ exports.doapply = function*() {
 
     }
     else {
+        console.log('222222222222222222');
 
-        result = yield thunkify(ProjectModel.updateParticipants, ProjectModel)(result._id,
+        result = yield thunkify(ProjectModel.updateParticipants, ProjectModel)(info.id,
             {
                 _id: this.session.wechatUserInfo._id,
                 'status': -1
