@@ -42,6 +42,12 @@ ProjectSchema.statics = {
             return result.populate('participants._id').exec(cb);
     },
 
+    findByidAndUserID: function (id,userid, cb) {
+        var result= this.findOne({"_id": id,"participants._id":userid})
+
+        return result.populate('participants._id').exec(cb);
+    },
+
     updateParticipants: function (id,participants, cb) {
         return this.update({_id: id}, {$addToSet: {participants: participants}}, cb);
     },

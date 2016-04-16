@@ -43,6 +43,7 @@ module.exports = function (router) {
 
     router.get('/member/project/', wechatoauth.infoview(), project.showindex);
     router.get('/member/project/:id?/detail', wechatoauth.infoview(), project.detail);
+    router.post('/member/project/doapply', wechatoauth.infoapi(), project.doapply);
     router.get('/member/info/add', wechatoauth.view(), member.showadd);
     router.post('/member/info/doadd', wechatoauth.api(), member.doadd);
 

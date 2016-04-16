@@ -38,21 +38,56 @@ exports.showindex = function*() {
 exports.detail = function*() {
     let info = this.params;
 
-    var result = yield thunkify(ProjectModel.findByid, ProjectModel)(info.id);
+    var result = yield thunkify(ProjectModel.findByidAndUserID, ProjectModel)(info.id, this.session.wechatUserInfo._id);
     console.log(result);
+    if (result && result.participants[0].status == -1) {
+        this.body = '你的申请还未审批';
+    }
+    else if (result) {
+        yield baserender(this, "member/project/detail", {
+            title: '项目详情',
 
-    result = yield thunkify(ProjectModel.updateParticipants, ProjectModel)(result._id,
-        {
-            _id: this.session.wechatUserInfo._id,
-            'status': -1
-        }
-    );
+            info: result
 
+        });
+    }
+    else {
+        yield baserender(this, "member/project/apply", {
+            title: '请先申请,等待审批',
 
-    yield baserender(this, "member/project/detail", {
-        title: '项目详情',
+            info: result
 
-        info: result
+        });
+    }
 
-    });
+}
+
+//提交申请
+exports.doapply = function*() {
+    var info = this.request.body;
+
+    var result = yield thunkify(ProjectModel.findByidAndUserID, ProjectModel)(info.id, this.session.wechatUserInfo._id);
+    console.log(result);
+    if (result && result.participants[0].status == -1) {
+
+        this.send(null, 0, "你的申请还未审批");
+    }
+    else if (result) {
+
+        this.send(null, 0, "你的审批已经通过");
+
+    }
+    else {
+
+        result = yield thunkify(ProjectModel.updateParticipants, ProjectModel)(result._id,
+            {
+                _id: this.session.wechatUserInfo._id,
+                'status': -1
+            }
+        );
+
+        this.send(null, 0, "申请已经提交请等待审核");
+
+    }
+
 }
