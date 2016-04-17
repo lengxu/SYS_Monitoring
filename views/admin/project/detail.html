@@ -30,6 +30,31 @@
 
 
 {{#section 'footer'}}
+<script>
+
+    var projectid = '{{projectinfo._id}}';
+    function doapprove(wechatuserid,status) {
+        $.ajax({
+            url: '/sysadmin/project/doapprove',
+            type: 'post',
+            data: {id: projectid, wechatuserid: wechatuserid,status:status},
+            success: function (data, status) {
+                if (status == 'success') {
+                    if (data.retCode == 0) {
+                        alert("保存成功");
+                        location.reload();
+                    } else {
+                        alert(data.retMsg);
+                    }
+                }
+            },
+            error: function (data, status) {
+                alert('111');
+            }
+        });
+    }
+
+</script>
 
 {{/section}}
 
@@ -97,9 +122,9 @@
 
                         <th>昵称</th>
 
-                        <th >姓名</th>
+                        <th>姓名</th>
 
-                        <th >手机号</th>
+                        <th>手机号</th>
 
                         <th class="hidden-480">部门</th>
 
@@ -107,9 +132,9 @@
 
                         <th class="hidden-480">Email</th>
 
-                        <th >状态</th>
+                        <th>状态</th>
 
-                        <th >操作</th>
+                        <th>操作</th>
 
                     </tr>
 
@@ -123,19 +148,21 @@
 
                         <td>{{_id.nickname}}</td>
 
-                        <td >{{_id.userinfo.name}}</td>
+                        <td>{{_id.userinfo.name}}</td>
 
-                        <td >{{_id.userinfo.tel}}</td>
+                        <td>{{_id.userinfo.tel}}</td>
 
-                        <td >{{_id.userinfo.department}}</td>
+                        <td>{{_id.userinfo.department}}</td>
 
                         <td class="hidden-480">{{_id.userinfo.ext}}</td>
 
                         <td class="hidden-480">{{_id.userinfo.email}}</td>
 
-                        <td >{{status}}</td>
+                        <td>{{status}}</td>
 
-                        <td >审核</td>
+                        <td><a href="javascript:void(null)" onclick="doapprove('{{_id._id}}',0)">审核</a>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(null)"
+                                                       onclick="doapprove('{{_id._id}}',-1)">取消审核</a></td>
 
                     </tr>
                     {{/items}}

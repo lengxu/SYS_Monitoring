@@ -49,7 +49,13 @@ ProjectSchema.statics = {
     },
 
     updateParticipants: function (id,participants, cb) {
-        return this.update({_id: id}, {$addToSet: {participants: participants}}, cb);
+        return this.update({_id: id,}, {$addToSet: {participants: participants}}, cb);
+    },
+    //更新项目成员状态
+    updateParticipantStatus: function (id,wechatuserid,status, cb) {
+
+            console.log(status);
+        return this.update({_id: id,"participants._id":wechatuserid},{$set: {"participants.0.status": status}}, cb);
     },
     populatedata:function (data,cb) {
 
@@ -89,6 +95,20 @@ ProjectSchema.methods.GetMonitortingStatus = function () {
     }
 };
 
+
+ProjectSchema.methods.GetParticipantStatus = function () {
+    if (this.participants.status == 0) {
+
+        return '已启用';
+    }
+    else if (this.participants.status  == -1) {
+
+        return '未启用';
+    }
+    else {
+        return '未知状态';
+    }
+};
 
 ProjectSchema.plugin(koamongoosePagination);
 

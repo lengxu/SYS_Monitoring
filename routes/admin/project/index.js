@@ -12,8 +12,6 @@ exports.showindex = function*() {
     var requestinfo = this.request.query;
     const resultsPerPage = config.paginate.resultsPerPage;
     const currentPage = requestinfo.page || 1; // You should use this.query.page here
-    console.log(currentPage);
-    console.log(requestinfo);
     var result = yield ProjectModel.paginate({
         // conditions: { 'status': -1 }, // Only enabled items
         columns: '', // Retrieve only those columns
@@ -51,15 +49,25 @@ exports.detail = function*() {
 
     var projectinfo=yield thunkify(ProjectModel.findByid, ProjectModel)(info.id);
 
-    console.log(projectinfo.participants);
-
     yield adminbaserender(this, "admin/project/detail", {
 
         title: '项目详情',
 
         projectinfo: projectinfo,
-        
+
         items: projectinfo.participants
 
     });
+}
+
+exports.doapprove = function*() {
+
+    var info = this.request.body;
+
+    var project = new ProjectModel(info);
+
+   var result= yield thunkify(ProjectModel.updateParticipantStatus, ProjectModel)(info.id,info.wechatuserid,info.status);
+
+    this.send(null, 0, "保存成功");
+
 }
