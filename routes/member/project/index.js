@@ -57,8 +57,11 @@ exports.detail = function*() {
     else if (result) {
         yield baserender(this, "member/project/detail", {
             title: '项目详情',
+            
+            projectinfo: projectinfo,
 
-            projectinfo: projectinfo
+            items: projectinfo.participants
+
 
         });
     }
@@ -88,7 +91,6 @@ exports.doapply = function*() {
 
     }
     else {
-        console.log('222222222222222222');
 
         result = yield thunkify(ProjectModel.updateParticipants, ProjectModel)(info.id,
             {
