@@ -46,7 +46,13 @@ exports.detail = function*() {
 
     console.log(projectinfo);
     if (result && result.participants[0].status == -1) {
-        this.body = '你的申请还未审批';
+
+        yield baserender(this, "member/project/approve", {
+            title: '你的申请还未审批',
+            message:'你的申请还未审批',
+            projectinfo: projectinfo
+
+        });
     }
     else if (result) {
         yield baserender(this, "member/project/detail", {

@@ -1,0 +1,107 @@
+{{#section 'pagelevelstyles'}}
+<!-- BEGIN PAGE LEVEL STYLES -->
+
+<link href="/member/css/bootstrap-fileupload.css" rel="stylesheet" type="text/css"/>
+
+<link href="/member/css/chosen.css" rel="stylesheet" type="text/css"/>
+
+<link href="/member/css/profile.css" rel="stylesheet" type="text/css"/>
+
+<!-- END PAGE LEVEL STYLES -->
+{{/section}}
+
+{{#section 'pagelevelscripts'}}
+<!-- BEGIN PAGE LEVEL PLUGINS -->
+
+<script type="text/javascript" src="/member/js/bootstrap-fileupload.js"></script>
+
+<script type="text/javascript" src="/member/js/chosen.jquery.min.js"></script>
+
+<!-- END PAGE LEVEL PLUGINS -->
+
+<!-- BEGIN PAGE LEVEL SCRIPTS -->
+
+<script src="/member/js/app.js"></script>
+
+<!-- END PAGE LEVEL SCRIPTS -->
+{{/section}}
+
+
+{{#section 'footer'}}
+<script type="text/javascript">
+    jQuery(document).ready(function () {
+
+        $("#btapply").click(function () {
+            $.ajax({
+                url: '/member/project/doapply',
+                type: 'post',
+                data: {id: $("#hdprojectid").val()},
+                success: function (data, status) {
+                    if (status == 'success') {
+                        if (data.retCode == 0) {
+                            alert("申请成功,请等待审核");
+                            location.href.reload();
+                        } else {
+                            alert(data.retMsg);
+                        }
+                    }
+                },
+                error: function (data, status) {
+
+                }
+            });
+        });
+    });
+</script>
+
+{{/section}}
+
+
+<div class="row-fluid profile">
+
+    <div class="span12">
+
+        <!--BEGIN TABS-->
+
+        <div class="tab-content">
+
+            <div id="tab_1_2" class="tab-pane profile-classic row-fluid active">
+
+                <div class="span2"></div>
+
+                <ul class="unstyled span10">
+                    <li>
+                        <div class="alert alert-info">
+
+                            <strong>{{message}}</strong>
+
+                        </div>
+                    </li>
+                    <li><span>项目名称:</span> {{projectinfo.name}}<input type="hidden" id="hdprojectid"
+                                                                      value="{{projectinfo._id}}"/></li>
+
+                    <li><span>部门:</span> {{projectinfo.department}}</li>
+
+                    <li><span>网站地址:</span><a href="{{projectinfo.siteurl}}" target="_blank"> {{projectinfo.siteurl}}</a>
+                    </li>
+
+                    <li><span>状态:</span> {{projectinfo.GetStatus}}</li>
+
+                    <li><span>开始监控时间::</span>{{projectinfo.starttime}}</li>
+
+                    <li><span>最后监控时间:</span> {{projectinfo.lastmonitortime}}</li>
+
+                    <li><span>最后监控状态:</span> {{projectinfo.GetMonitortingStatus}}</li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+
+        <!--END TABS-->
+
+    </div>
+
+</div>
