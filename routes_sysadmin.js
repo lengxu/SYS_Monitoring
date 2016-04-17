@@ -43,6 +43,7 @@ module.exports = function(router) {
     router.get('/sysadmin/project/add', adminauth.view(), adminproject.showadd);
 
     router.post('/sysadmin/project/doadd', adminauth.api(), adminproject.doadd);
+    router.get('/sysadmin/project/:id?/detail', adminauth.view(), adminproject.detail);
 
 
 

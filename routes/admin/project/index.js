@@ -44,3 +44,22 @@ exports.doadd = function*() {
     this.send(null, 0, "保存成功");
 
 }
+
+
+exports.detail = function*() {
+    let info = this.params;
+
+    var projectinfo=yield thunkify(ProjectModel.findByid, ProjectModel)(info.id);
+
+    console.log(projectinfo.participants);
+
+    yield adminbaserender(this, "admin/project/detail", {
+
+        title: '项目详情',
+
+        projectinfo: projectinfo,
+        
+        items: projectinfo.participants
+
+    });
+}

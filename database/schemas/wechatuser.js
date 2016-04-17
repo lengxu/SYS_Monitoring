@@ -18,6 +18,8 @@ var WechatUserSchema = new mongoose.Schema({
     updatetime: {type: Date},
     addip: {type: String},
     userinfo: {
+        name:{type:String},
+        department:{type:String},
         tel: {type: String},
         ext: {type: String},
         email: {type: String},

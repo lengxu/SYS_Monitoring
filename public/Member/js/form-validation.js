@@ -18,6 +18,13 @@ var FormValidation = function () {
                 focusInvalid: false, // do not focus the last invalid input
                 ignore: "",
                 rules: {
+                    name: {
+                        minlength: 3,
+                        required: true
+                    },
+                    department: {
+                        required: true
+                    },
                     tel: {
                         required: true
                     },
@@ -56,7 +63,6 @@ var FormValidation = function () {
                 },
 
                 submitHandler: function (form) {
-                    alert('1');
 
                     success1.show();
                     error1.hide();

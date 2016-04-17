@@ -1,0 +1,152 @@
+{{#section 'pagelevelstyles'}}
+
+<!-- BEGIN PAGE LEVEL STYLES -->
+
+<link href="/admin/css/bootstrap-fileupload.css" rel="stylesheet" type="text/css"/>
+
+<link href="/admin/css/chosen.css" rel="stylesheet" type="text/css"/>
+
+<link href="/admin/css/profile.css" rel="stylesheet" type="text/css"/>
+
+<!-- END PAGE LEVEL STYLES -->
+{{/section}}
+
+{{#section 'pagelevelscripts'}}
+<!-- BEGIN PAGE LEVEL PLUGINS -->
+
+<script type="text/javascript" src="/admin/js/bootstrap-fileupload.js"></script>
+
+<script type="text/javascript" src="/admin/js/chosen.jquery.min.js"></script>
+
+<!-- END PAGE LEVEL PLUGINS -->
+
+<!-- BEGIN PAGE LEVEL SCRIPTS -->
+
+<script src="/admin/js/app.js"></script>
+
+<!-- END PAGE LEVEL SCRIPTS -->
+
+{{/section}}
+
+
+{{#section 'footer'}}
+
+{{/section}}
+
+<div class="row-fluid profile">
+
+    <div class="span12">
+
+        <!--BEGIN TABS-->
+
+        <div class="tab-content">
+
+            <div id="tab_1_2" class="tab-pane profile-classic row-fluid active">
+
+
+                <ul class="unstyled span10">
+
+                    <li><span>项目名称:</span> {{projectinfo.name}}<input type="hidden" id="hdprojectid"
+                                                                      value="{{projectinfo._id}}"/></li>
+
+                    <li><span>部门:</span> {{projectinfo.department}}</li>
+
+                    <li><span>网站地址:</span><a href="{{projectinfo.siteurl}}" target="_blank"> {{projectinfo.siteurl}}</a>
+                    </li>
+
+                    <li><span>状态:</span> {{projectinfo.GetStatus}}</li>
+
+                    <li><span>开始监控时间::</span>{{projectinfo.starttime}}</li>
+
+                    <li><span>最后监控时间:</span> {{projectinfo.lastmonitortime}}</li>
+
+                    <li><span>最后监控状态:</span> {{projectinfo.GetMonitortingStatus}}</li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+
+        <!--END TABS-->
+
+    </div>
+
+    <div class="span12">
+
+        <!-- BEGIN EXAMPLE TABLE PORTLET-->
+
+        <div class="portlet box green">
+
+            <div class="portlet-title">
+
+                <div class="caption"><i class="icon-globe"></i>人员列表</div>
+
+            </div>
+
+            <div class="portlet-body">
+
+                <table class="table table-striped table-bordered table-hover table-full-width" id="sample_1">
+
+                    <thead>
+
+                    <tr>
+
+                        <th>OpenID</th>
+
+                        <th>昵称</th>
+
+                        <th >姓名</th>
+
+                        <th >手机号</th>
+
+                        <th class="hidden-480">部门</th>
+
+                        <th class="hidden-480">分机</th>
+
+                        <th class="hidden-480">Email</th>
+
+                        <th >状态</th>
+
+                        <th >操作</th>
+
+                    </tr>
+
+                    </thead>
+
+                    <tbody>
+                    {{#items}}
+                    <tr>
+
+                        <td>{{_id.openid}}</td>
+
+                        <td>{{_id.nickname}}</td>
+
+                        <td >{{_id.userinfo.name}}</td>
+
+                        <td >{{_id.userinfo.tel}}</td>
+
+                        <td >{{_id.userinfo.department}}</td>
+
+                        <td class="hidden-480">{{_id.userinfo.ext}}</td>
+
+                        <td class="hidden-480">{{_id.userinfo.email}}</td>
+
+                        <td >{{status}}</td>
+
+                        <td >审核</td>
+
+                    </tr>
+                    {{/items}}
+                    </tbody>
+
+                </table>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
