@@ -55,9 +55,10 @@ exports.detail = function*() {
         });
     }
     else if (result) {
+
         yield baserender(this, "member/project/detail", {
             title: '项目详情',
-            
+
             projectinfo: projectinfo,
 
             items: projectinfo.participants

@@ -37,8 +37,8 @@ ProjectSchema.statics = {
     },
 
     findByid: function (id, cb) {
-        var result= this.findOne({_id: id})
 
+        var result=this.findOne({_id: id}, cb);
             return result.populate('participants._id').exec(cb);
     },
 
@@ -55,7 +55,7 @@ ProjectSchema.statics = {
     updateParticipantStatus: function (id,wechatuserid,status, cb) {
 
             console.log(status);
-        return this.update({_id: id,"participants._id":wechatuserid},{$set: {"participants.0.status": status}}, cb);
+        return this.update({_id: id,"participants._id":wechatuserid},{$set:{"participants.$.status":status}}, cb);
     },
     populatedata:function (data,cb) {
 
@@ -65,7 +65,7 @@ ProjectSchema.statics = {
 
     //获取监测项目
     findMonitorProject:function (monitortime,cb) {
-        
+
         var result= this.find({status:0}, cb);
 
         return result.populate('participants._id').exec(cb);

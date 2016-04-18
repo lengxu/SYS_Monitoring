@@ -64,6 +64,8 @@ exports.doapprove = function*() {
 
     var info = this.request.body;
 
+    console.log(info);
+
     var project = new ProjectModel(info);
 
    var result= yield thunkify(ProjectModel.updateParticipantStatus, ProjectModel)(info.id,info.wechatuserid,info.status);

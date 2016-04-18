@@ -106,7 +106,7 @@ config.upload = {
 
 //白名单IP
 config.ip = {
-    enable: false,
+    enable: true,
     whiteList: ['192.168.0.*', '8.8.8.[0-3]'],
     blackList: ['144.144.*']
 }

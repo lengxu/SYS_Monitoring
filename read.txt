@@ -1,0 +1,3 @@
+db.projects.update({'name':'沃尔沃项目'},{$pop:{'participants':0}})
+
+db.projects.update({_id: ObjectId('5713a8cf0ed903397f419321'),"participants._id":ObjectId('5714aa8eb80492ead4001a07')},{$set:{"participants.$.status":0}})
