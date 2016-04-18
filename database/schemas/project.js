@@ -61,6 +61,14 @@ ProjectSchema.statics = {
 
         console.log(data);
         return data[0].populate(('participants._id'),cb);
+    },
+
+    //获取监测项目
+    findMonitorProject:function (monitortime,cb) {
+        
+        var result= this.find({status:0}, cb);
+
+        return result.populate('participants._id').exec(cb);
     }
 
 };

@@ -125,7 +125,7 @@ config.event = {
             key: 'monitoring',
             name: '网站监测',
             minite: 1,
-            second: 1,
+            second: 10,
             enable: true,
             templateid:'mXYIPyHYxNHvl-0gav9MI47-KyAi9VPw2HrxyAfD7G0'
         }
