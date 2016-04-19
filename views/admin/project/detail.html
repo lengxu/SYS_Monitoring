@@ -33,11 +33,11 @@
 <script>
 
     var projectid = '{{projectinfo._id}}';
-    function doapprove(wechatuserid,status) {
+    function doapprove(wechatuserid, status) {
         $.ajax({
             url: '/sysadmin/project/doapprove',
             type: 'post',
-            data: {id: projectid, wechatuserid: wechatuserid,status:status},
+            data: {id: projectid, wechatuserid: wechatuserid, status: status},
             success: function (data, status) {
                 if (status == 'success') {
                     if (data.retCode == 0) {
@@ -57,7 +57,7 @@
 
 {{/section}}
 
-<div class="row-fluid profile">
+<div class="row-fluid">
 
     <div class="span12">
 
@@ -70,22 +70,23 @@
 
                 <ul class="unstyled span10">
 
-                    <li><span>项目名称:</span> {{projectinfo.name}}<input type="hidden" id="hdprojectid"
-                                                                      value="{{projectinfo._id}}"/></li>
+                    {{#with projectinfo}}
 
-                    <li><span>部门:</span> {{projectinfo.department}}</li>
+                    <li><span>项目名称:</span> {{name}}<input type="hidden" id="hdprojectid" value="{{_id}}"/></li>
 
-                    <li><span>网站地址:</span><a href="{{projectinfo.siteurl}}" target="_blank"> {{projectinfo.siteurl}}</a>
-                    </li>
+                    <li><span>部门:</span> {{department}}</li>
 
-                    <li><span>状态:</span> {{projectinfo.GetStatus}}</li>
+                    <li><span>网站地址:</span><a href="{{siteurl}}" target="_blank"> {{siteurl}}</a></li>
 
-                    <li><span>开始监控时间::</span>{{projectinfo.starttime}}</li>
+                    <li><span>状态:</span> {{GetStatus}}</li>
 
-                    <li><span>最后监控时间:</span> {{projectinfo.lastmonitortime}}</li>
+                    <li><span>开始监控时间::</span>{{GetStarttime}}</li>
 
-                    <li><span>最后监控状态:</span> {{projectinfo.GetMonitortingStatus}}</li>
+                    <li><span>最后监控时间:</span> {{GetLastmonitortime}}</li>
 
+                    <li><span>最后监控状态:</span> {{GetMonitortingStatus}}</li>
+
+                    {{/with}}
                 </ul>
 
             </div>
@@ -96,7 +97,8 @@
         <!--END TABS-->
 
     </div>
-
+</div>
+<div class="row-fluid">
     <div class="span12">
 
         <!-- BEGIN EXAMPLE TABLE PORTLET-->
@@ -142,26 +144,32 @@
                     <tbody>
                     {{#items}}
                     <tr>
+                        {{#with _id}}
+                        <td>{{openid}}</td>
 
-                        <td>{{_id.openid}}</td>
+                        <td>{{nickname}}</td>
 
-                        <td>{{_id.nickname}}</td>
+                        {{#with userinfo}}
+                        <td>{{name}}</td>
 
-                        <td>{{_id.userinfo.name}}</td>
+                        <td>{{tel}}</td>
 
-                        <td>{{_id.userinfo.tel}}</td>
+                        <td>{{department}}</td>
 
-                        <td>{{_id.userinfo.department}}</td>
+                        <td class="hidden-480">{{ext}}</td>
 
-                        <td class="hidden-480">{{_id.userinfo.ext}}</td>
+                        <td class="hidden-480">{{email}}</td>
 
-                        <td class="hidden-480">{{_id.userinfo.email}}</td>
+                        {{/with}}
 
-                        <td>{{status}}</td>
+                        <td>{{../GetStatus}}</td>
 
-                        <td><a href="javascript:void(null)" onclick="doapprove('{{_id._id}}',0)">审核</a>
+                        <td><a href="javascript:void(null)" onclick="doapprove('{{_id}}',0)">审核</a>
                             &nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(null)"
-                                                       onclick="doapprove('{{_id._id}}',-1)">取消审核</a></td>
+                                                       onclick="doapprove('{{_id}}',-1)">取消审核</a></td>
+
+                        {{/with}}
+
 
                     </tr>
                     {{/items}}

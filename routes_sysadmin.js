@@ -41,8 +41,9 @@ module.exports = function(router) {
     router.get('/sysadmin/project/', adminauth.view(), adminproject.showindex);
     router.get('/sysadmin/project/index', adminauth.view(), adminproject.showindex);
     router.get('/sysadmin/project/add', adminauth.view(), adminproject.showadd);
-
     router.post('/sysadmin/project/doadd', adminauth.api(), adminproject.doadd);
+    router.get('/sysadmin/project/:id?/edit', adminauth.view(), adminproject.showedit);
+    router.post('/sysadmin/project/doedit', adminauth.api(), adminproject.doedit);
     router.get('/sysadmin/project/:id?/detail', adminauth.view(), adminproject.detail);
     router.post('/sysadmin/project/doapprove', adminauth.api(), adminproject.doapprove);
 

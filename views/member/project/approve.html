@@ -67,7 +67,6 @@
 
             <div id="tab_1_2" class="tab-pane profile-classic row-fluid active">
 
-                <div class="span2"></div>
 
                 <ul class="unstyled span10">
                     <li>
@@ -77,22 +76,23 @@
 
                         </div>
                     </li>
-                    <li><span>项目名称:</span> {{projectinfo.name}}<input type="hidden" id="hdprojectid"
-                                                                      value="{{projectinfo._id}}"/></li>
+                    {{#with projectinfo}}
+                    <li><span>项目名称:</span> {{name}}<input type="hidden" id="hdprojectid"
+                                                          value="{{_id}}"/></li>
 
-                    <li><span>部门:</span> {{projectinfo.department}}</li>
+                    <li><span>部门:</span> {{department}}</li>
 
-                    <li><span>网站地址:</span><a href="{{projectinfo.siteurl}}" target="_blank"> {{projectinfo.siteurl}}</a>
+                    <li><span>网站地址:</span><a href="{{siteurl}}" target="_blank"> {{siteurl}}</a>
                     </li>
 
-                    <li><span>状态:</span> {{projectinfo.GetStatus}}</li>
+                    <li><span>状态:</span> {{GetStatus}}</li>
 
-                    <li><span>开始监控时间::</span>{{projectinfo.starttime}}</li>
+                    <li><span>开始监控时间::</span>{{GetStarttime}}</li>
 
-                    <li><span>最后监控时间:</span> {{projectinfo.lastmonitortime}}</li>
+                    <li><span>最后监控时间:</span> {{GetLastmonitortime}}</li>
 
-                    <li><span>最后监控状态:</span> {{projectinfo.GetMonitortingStatus}}</li>
-
+                    <li><span>最后监控状态:</span> {{GetMonitortingStatus}}</li>
+                    {{/with}}
                 </ul>
 
             </div>

@@ -19,9 +19,26 @@
 
 <!-- END PAGE LEVEL PLUGINS -->
 
+<!-- BEGIN PAGE LEVEL PLUGINS -->
+
+<script src="/member/js/jquery.flot.js"></script>
+
+<script src="/member/js/jquery.flot.resize.js"></script>
+
+<script src="/member/js/jquery.flot.pie.js"></script>
+
+<script src="/member/js/jquery.flot.stack.js"></script>
+
+<script src="/member/js/jquery.flot.crosshair.js"></script>
+
+<!-- END PAGE LEVEL PLUGINS -->
+
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
 
 <script src="/member/js/app.js"></script>
+
+<script src="/member/js/charts.js"></script>
+
 
 <!-- END PAGE LEVEL SCRIPTS -->
 {{/section}}
@@ -51,12 +68,19 @@
                 }
             });
         });
+
+
+        Charts.init();
+
+        Charts.initCharts();
+
+        Charts.initPieCharts();
     });
 </script>
 
 {{/section}}
 
-<div class="row-fluid profile">
+<div class="row-fluid">
 
     <div class="span12">
 
@@ -69,21 +93,23 @@
 
                 <ul class="unstyled span10">
 
-                    <li><span>项目名称:</span> {{projectinfo.name}}<input type="hidden" id="hdprojectid"
-                                                                      value="{{projectinfo._id}}"/></li>
+                    {{#with projectinfo}}
 
-                    <li><span>部门:</span> {{projectinfo.department}}</li>
+                    <li><span>项目名称:</span> {{name}}<input type="hidden" id="hdprojectid" value="{{projectinfo._id}}" /></li>
 
-                    <li><span>网站地址:</span><a href="{{projectinfo.siteurl}}" target="_blank"> {{projectinfo.siteurl}}</a>
-                    </li>
+                    <li><span>部门:</span> {{department}}</li>
 
-                    <li><span>状态:</span> {{projectinfo.GetStatus}}</li>
+                    <li><span>网站地址:</span><a href="{{siteurl}}" target="_blank"> {{siteurl}}</a></li>
 
-                    <li><span>开始监控时间::</span>{{projectinfo.starttime}}</li>
+                    <li><span>状态:</span> {{GetStatus}}</li>
 
-                    <li><span>最后监控时间:</span> {{projectinfo.lastmonitortime}}</li>
+                    <li><span>开始监控时间::</span>{{GetStarttime}}</li>
 
-                    <li><span>最后监控状态:</span> {{projectinfo.GetMonitortingStatus}}</li>
+                    <li><span>最后监控时间:</span> {{GetLastmonitortime}}</li>
+
+                    <li><span>最后监控状态:</span> {{GetMonitortingStatus}}</li>
+
+                    {{/with}}
 
                 </ul>
 
@@ -94,8 +120,29 @@
 
         <!--END TABS-->
 
-    </div>
+        <!-- BEGIN INTERACTIVE CHART PORTLET-->
 
+        <div class="portlet box red">
+
+            <div class="portlet-title">
+
+                <div class="caption"><i class="icon-reorder"></i>监测图表</div>
+
+            </div>
+
+            <div class="portlet-body">
+
+                <div id="chart_2" class="chart"></div>
+
+            </div>
+
+        </div>
+
+        <!-- END INTERACTIVE CHART PORTLET-->
+
+    </div>
+</div>
+<div class="row-fluid">
     <div class="span12">
 
         <!-- BEGIN EXAMPLE TABLE PORTLET-->
@@ -154,7 +201,7 @@
 
                         <td class="hidden-480">{{_id.userinfo.email}}</td>
 
-                        <td>{{status}}</td>
+                        <td>{{GetStatus}}</td>
 
                     </tr>
                     {{/items}}

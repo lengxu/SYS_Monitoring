@@ -29,7 +29,7 @@ exports.showindex = function*() {
 //添加项目
 exports.showadd = function*() {
     yield adminbaserender(this, "admin/project/add", {
-        title: '编辑项目'
+        title: '添加项目'
     });
 }
 exports.doadd = function*() {
@@ -43,11 +43,46 @@ exports.doadd = function*() {
 
 }
 
+//修改项目
+exports.showedit = function*() {
+
+    let info = this.params;
+
+    var projectinfo=yield thunkify(ProjectModel.findByid, ProjectModel)(info.id);
+
+    yield adminbaserender(this, "admin/project/edit", {
+
+        title: '项目详情',
+
+        projectinfo: projectinfo
+    });
+}
+exports.doedit = function*() {
+
+    var info = this.request.body;
+
+
+    var project = new ProjectModel(info);
+
+    console.log(project);
+
+    var result=  yield thunkify(ProjectModel.updateProjectinfo, ProjectModel)(project);
+
+    console.log(result);
+
+    this.send(null, 0, "保存成功");
+
+}
+
 
 exports.detail = function*() {
     let info = this.params;
 
+    console.log(info);
+
     var projectinfo=yield thunkify(ProjectModel.findByid, ProjectModel)(info.id);
+
+    console.log(projectinfo.participants);
 
     yield adminbaserender(this, "admin/project/detail", {
 

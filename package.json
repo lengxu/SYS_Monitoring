@@ -41,6 +41,7 @@
     "later": "^1.2.0",
     "loader": "^2.1.0",
     "loader-koa": "^1.0.0",
+    "moment": "^2.13.0",
     "node-schedule": "^1.1.0",
     "ping": "^0.1.10",
     "redis": "^2.5.0-1",
