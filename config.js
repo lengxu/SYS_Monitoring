@@ -106,7 +106,7 @@ config.upload = {
 
 //白名单IP
 config.ip = {
-    enable: true,
+    enable: false,
     whiteList: ['192.168.0.*', '8.8.8.[0-3]'],
     blackList: ['144.144.*']
 }
@@ -119,7 +119,7 @@ config.paginate=
 
 //事件机制
 config.event = {
-    enable: false,
+    enable: true,
     eventlist: {
         monitoringinfo: {
             key: 'monitoring',

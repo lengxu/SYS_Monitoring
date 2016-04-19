@@ -69,7 +69,14 @@ ProjectSchema.statics = {
         var result= this.find({status:0}, cb);
 
         return result.populate('participants._id').exec(cb);
+    },
+
+    //更新网站的监测信息
+    updateProjectMonitorInfo:function (id,monitorstatus,cb) {
+        return this.update({_id: id},{$set:{lastmonitorstatus:monitorstatus,lastmonitortime:new Date().toFormat("YYYY-MM-DD HH24:MI:SS")}}, cb);
     }
+    
+    
 
 };
 
