@@ -97,8 +97,7 @@
         <!--END TABS-->
 
     </div>
-</div>
-<div class="row-fluid">
+
     <div class="span12">
 
         <!-- BEGIN EXAMPLE TABLE PORTLET-->
@@ -162,11 +161,16 @@
 
                         {{/with}}
 
-                        <td>{{../GetStatus}}</td>
+                        <td>{{../status}}</td>
 
-                        <td><a href="javascript:void(null)" onclick="doapprove('{{_id}}',0)">审核</a>
-                            &nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(null)"
-                                                       onclick="doapprove('{{_id}}',-1)">取消审核</a></td>
+                        <td>
+                            {{#ifCond ../status "==" -1 }}
+                            <a href="javascript:void(null)" onclick="doapprove('{{_id}}',0)">审核</a>
+                            {{else}}
+                            <a href="javascript:void(null)"
+                               onclick="doapprove('{{_id}}',-1)">取消审核</a>
+                            {{/ifCond }}
+                        </td>
 
                         {{/with}}
 

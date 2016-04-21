@@ -7,12 +7,13 @@ var koa = require('koa'),
     views = require('koa-views'),
 //render = require('koa-ejs'),
     handlebars = require("koa-handlebars"),
+    // handlebarhelpers=require("handlebars-helpers"),
     path = require('path'),
     onerror = require('koa-onerror'),
     session = require('koa-generic-session'),
     koaBunyanLogger = require('koa-bunyan-logger'),
-    //paginate = require("koa-paginate"),
-    //  paginateHelper = require('handlebars-helper-paginate'),
+//paginate = require("koa-paginate"),
+//  paginateHelper = require('handlebars-helper-paginate'),
     paginateHelper = require('express-handlebars-paginate'),
     sessionStore = require('koa-session-mongoose');
 
@@ -59,7 +60,7 @@ app.use(function*(next) {
 //     debug: true
 // });
 
-// handlebars templating
+
 app.use(handlebars({
     extension: ['html', 'handlebars'],
     defaultLayout: "layout.html",
@@ -75,9 +76,38 @@ app.use(handlebars({
         static: function (name) {
             return require('./lib/static.js').map(name);
         },
-        paginateHelper:paginateHelper.createPagination
+        paginateHelper: paginateHelper.createPagination
+        ,ifCond:function (v1, operator, v2, options) {
+            switch (operator) {
+                case '==':
+                    return (v1 == v2) ? options.fn(this) : options.inverse(this);
+                case '!=':
+                    return (v1 != v2) ? options.fn(this) : options.inverse(this);
+                case '===':
+                    return (v1 === v2) ? options.fn(this) : options.inverse(this);
+                case '<':
+                    return (v1 < v2) ? options.fn(this) : options.inverse(this);
+                case '<=':
+                    return (v1 <= v2) ? options.fn(this) : options.inverse(this);
+                case '>':
+                    return (v1 > v2) ? options.fn(this) : options.inverse(this);
+                case '>=':
+                    return (v1 >= v2) ? options.fn(this) : options.inverse(this);
+                case '&&':
+                    return (v1 && v2) ? options.fn(this) : options.inverse(this);
+                case '||':
+                    return (v1 || v2) ? options.fn(this) : options.inverse(this);
+                default:
+                    return options.inverse(this);
+            }
+        }
+        // ,handlebarhelpers1: handlebarhelpers.registerHelperq
+
+
     }
-}));
+}))
+;
+// app.use(handlebarhelpers.register());
 
 app.keys = ['koa', 'nodedb'];
 
