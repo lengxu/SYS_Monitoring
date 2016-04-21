@@ -102,6 +102,11 @@ ProjectSchema.statics = {
 };
 
 ProjectSchema.methods.GetStatus = function () {
+
+    console.log('333333335555');
+
+    return ;
+
     if (this.status == 0) {
 
         return '已启用';
@@ -117,6 +122,8 @@ ProjectSchema.methods.GetStatus = function () {
 
 
 ProjectSchema.methods.GetMonitortingStatus = function () {
+
+    console.log('3333444');
 
     if (this.lastmonitorstatus == 200) {
 
@@ -136,7 +143,9 @@ ProjectSchema.methods.GetMonitortingStatus = function () {
 };
 
 
-ProjectSchema.methods.GetParticipantStatus = function () {
+ProjectSchema.methods.GetParticipantStatus= function () {
+
+    console.log('11111112244444');
     if (this.participants.status == 0) {
 
         return '已启用';

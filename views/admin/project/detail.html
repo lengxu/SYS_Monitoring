@@ -97,6 +97,8 @@
         <!--END TABS-->
 
     </div>
+    </div>
+<div class="row-fluid">
 
     <div class="span12">
 
@@ -143,7 +145,11 @@
                     <tbody>
                     {{#items}}
                     <tr>
+
+
                         {{#with _id}}
+
+
                         <td>{{openid}}</td>
 
                         <td>{{nickname}}</td>
@@ -161,7 +167,8 @@
 
                         {{/with}}
 
-                        <td>{{../status}}</td>
+                        <td>{{GetStatus}}</td>
+
 
                         <td>
                             {{#ifCond ../status "==" -1 }}

@@ -81,7 +81,6 @@ exports.doapply = function*() {
     
     var info = this.request.body;
 
-    console.log(info);
     var result = yield thunkify(ProjectModel.findByidAndUserID, ProjectModel)(info.id, this.session.wechatUserInfo._id);
     if (result && result.participants[0].status == -1) {
 

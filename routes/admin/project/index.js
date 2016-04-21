@@ -78,11 +78,7 @@ exports.doedit = function*() {
 exports.detail = function*() {
     let info = this.params;
 
-    console.log(info);
-
     var projectinfo=yield thunkify(ProjectModel.findByid, ProjectModel)(info.id);
-
-    console.log(projectinfo.participants);
 
     yield adminbaserender(this, "admin/project/detail", {
 
