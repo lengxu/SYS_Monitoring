@@ -9,7 +9,8 @@ let koaMongoosePagination = require('koa-mongoose-pagination'),
 //添加项目
 exports.showadd = function*() {
     yield baserender(this, "member/info/add", {
-        title: '保存用户信息'
+        title: '保存用户信息',
+        menuinfo:{index:"active"}
     });
 }
 exports.doadd = function*() {

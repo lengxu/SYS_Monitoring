@@ -27,6 +27,7 @@ exports.showindex = function*() {
     });
     yield baserender(this, "member/project/index", {
         title: '我的项目',
+        menuinfo:{project:"active",project_first:"active"},
         totalRows: result.count,
         items: result.data,
         pagination: {page: currentPage, limit: resultsPerPage, totalRows: result.count}
@@ -47,6 +48,7 @@ exports.detail = function*() {
         yield baserender(this, "member/project/approve", {
             title: '你的申请还未审批',
             message:'你的申请还未审批',
+            menuinfo:{project:"active",project_first:"active"},
             projectinfo: projectinfo
 
         });
@@ -54,7 +56,7 @@ exports.detail = function*() {
     else if (result) {
         yield baserender(this, "member/project/detail", {
             title: '项目详情',
-
+            menuinfo:{project:"active",project_first:"active"},
             projectinfo: projectinfo,
 
             items: yield projectinfo.participants.map(function *(item) {
@@ -82,7 +84,7 @@ exports.detail = function*() {
     else {
         yield baserender(this, "member/project/apply", {
             title: '请先申请,等待审批',
-
+            menuinfo:{project:"active",project_first:"active"},
             projectinfo: projectinfo
 
         });
