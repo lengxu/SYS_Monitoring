@@ -52,7 +52,6 @@ exports.detail = function*() {
         });
     }
     else if (result) {
-console.log(projectinfo.participants);
         yield baserender(this, "member/project/detail", {
             title: '项目详情',
 

@@ -22,6 +22,7 @@ exports.showindex = function*() {
 
     yield adminbaserender(this, "admin/project/index", {
         title: '项目列表',
+        menuinfo:{project:"active",project_first:"active"},
         totalRows: result.count,
         items: result.data,
         pagination: {page: currentPage, limit: resultsPerPage, totalRows: result.count}
@@ -30,7 +31,8 @@ exports.showindex = function*() {
 //添加项目
 exports.showadd = function*() {
     yield adminbaserender(this, "admin/project/add", {
-        title: '添加项目'
+        title: '添加项目',
+        menuinfo:{project:"active",project_second:"active"}
     });
 }
 exports.doadd = function*() {
@@ -54,6 +56,8 @@ exports.showedit = function*() {
     yield adminbaserender(this, "admin/project/edit", {
 
         title: '项目详情',
+
+        menuinfo:{project:"active",project_first:"active"},
 
         projectinfo: projectinfo
     });
@@ -83,6 +87,8 @@ exports.detail = function*() {
     yield adminbaserender(this, "admin/project/detail", {
 
         title: '项目详情',
+
+        menuinfo:{project:"active",project_first:"active"},
 
         projectinfo: projectinfo,
 
