@@ -25,8 +25,6 @@ exports.showindex = function*() {
         limit: resultsPerPage,
         offset: (currentPage * resultsPerPage) - resultsPerPage
     });
-
-    // var result2=yield thunkify(ProjectModel.populatedata, ProjectModel)(result.data);
     yield baserender(this, "member/project/index", {
         title: '我的项目',
         totalRows: result.count,
@@ -54,15 +52,32 @@ exports.detail = function*() {
         });
     }
     else if (result) {
-
+console.log(projectinfo.participants);
         yield baserender(this, "member/project/detail", {
             title: '项目详情',
 
             projectinfo: projectinfo,
 
-            items: projectinfo.participants
-
-
+            items: yield projectinfo.participants.map(function *(item) {
+                var newitem={};
+                switch  (item.status) {
+                    case -1:
+                        newitem.getstatus = '未审核';
+                        break;
+                    case 0:
+                        newitem.getstatus = '已审核';
+                        break;
+                    case -255:
+                        newitem.getstatus = '已删除';
+                        break;
+                    default:
+                        newitem.getstatus = '未知状态';
+                        break;
+                }
+                newitem._id=item._id;
+                newitem.status=item.status;
+                return newitem;
+            })
         });
     }
     else {

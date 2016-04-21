@@ -187,21 +187,28 @@
                     {{#items}}
                     <tr>
 
-                        <td>{{_id.openid}}</td>
+                        {{#with _id}}
 
-                        <td>{{_id.nickname}}</td>
 
-                        <td>{{_id.userinfo.name}}</td>
+                        <td>{{openid}}</td>
 
-                        <td>{{_id.userinfo.tel}}</td>
+                        <td>{{nickname}}</td>
 
-                        <td>{{_id.userinfo.department}}</td>
+                        {{#with userinfo}}
+                        <td>{{name}}</td>
 
-                        <td class="hidden-480">{{_id.userinfo.ext}}</td>
+                        <td>{{tel}}</td>
 
-                        <td class="hidden-480">{{_id.userinfo.email}}</td>
+                        <td>{{department}}</td>
 
-                        <td>{{GetStatus}}</td>
+                        <td class="hidden-480">{{ext}}</td>
+
+                        <td class="hidden-480">{{email}}</td>
+
+                        {{/with}}
+
+                        <td>{{../getstatus}}</td>
+                        {{/with}}
 
                     </tr>
                     {{/items}}

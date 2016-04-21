@@ -19,6 +19,7 @@ exports.showindex = function*() {
         limit: resultsPerPage,
         offset: (currentPage * resultsPerPage) - resultsPerPage
     });
+
     yield adminbaserender(this, "admin/project/index", {
         title: '项目列表',
         totalRows: result.count,
@@ -48,7 +49,7 @@ exports.showedit = function*() {
 
     let info = this.params;
 
-    var projectinfo=yield thunkify(ProjectModel.findByid, ProjectModel)(info.id);
+    var projectinfo = yield thunkify(ProjectModel.findByid, ProjectModel)(info.id);
 
     yield adminbaserender(this, "admin/project/edit", {
 
@@ -64,11 +65,9 @@ exports.doedit = function*() {
 
     var project = new ProjectModel(info);
 
-    console.log(project);
 
-    var result=  yield thunkify(ProjectModel.updateProjectinfo, ProjectModel)(project);
+    var result = yield thunkify(ProjectModel.updateProjectinfo, ProjectModel)(project);
 
-    console.log(result);
 
     this.send(null, 0, "保存成功");
 
@@ -78,7 +77,8 @@ exports.doedit = function*() {
 exports.detail = function*() {
     let info = this.params;
 
-    var projectinfo=yield thunkify(ProjectModel.findByid, ProjectModel)(info.id);
+    var projectinfo = yield thunkify(ProjectModel.findByid, ProjectModel)(info.id);
+    console.log(projectinfo.participants);
 
     yield adminbaserender(this, "admin/project/detail", {
 
@@ -86,7 +86,26 @@ exports.detail = function*() {
 
         projectinfo: projectinfo,
 
-        items: projectinfo.participants
+        items: yield projectinfo.participants.map(function *(item) {
+            var newitem={};
+            switch  (item.status) {
+                case -1:
+                    newitem.getstatus = '未审核';
+                    break;
+                case 0:
+                    newitem.getstatus = '已审核';
+                    break;
+                case -255:
+                    newitem.getstatus = '已删除';
+                    break;
+                default:
+                    newitem.getstatus = '未知状态';
+                    break;
+            }
+            newitem._id=item._id;
+            newitem.status=item.status;
+            return newitem;
+        })
 
     });
 }
@@ -99,7 +118,7 @@ exports.doapprove = function*() {
 
     var project = new ProjectModel(info);
 
-   var result= yield thunkify(ProjectModel.updateParticipantStatus, ProjectModel)(info.id,info.wechatuserid,info.status);
+    var result = yield thunkify(ProjectModel.updateParticipantStatus, ProjectModel)(info.id, info.wechatuserid, info.status);
 
     this.send(null, 0, "保存成功");
 
