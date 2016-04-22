@@ -38,14 +38,20 @@ module.exports = function (router) {
     //api_ip:
     router.get('/wechat/ip/getIp', wechatip.getIp);
 
-//未登陆pc端查看
+    //未登陆pc端查看
     router.get('/project/:id?/detail',  project.detail);
 
     router.get('/member/project/', wechatoauth.infoview(), project.showindex);
     router.get('/member/project/:id?/detail', wechatoauth.infoview(), project.detail);
     router.post('/member/project/doapply', wechatoauth.infoapi(), project.doapply);
+
+    //用户信息
+    router.get('/member/info/detail', wechatoauth.infoview(), member.detail);
     router.get('/member/info/add', wechatoauth.view(), member.showadd);
     router.post('/member/info/doadd', wechatoauth.api(), member.doadd);
+    router.get('/member/info/edit', wechatoauth.infoview(), member.edit);
+    router.post('/member/info/doedit', wechatoauth.infoapi(), member.doedit);
+
 
 
 
