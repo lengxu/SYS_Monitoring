@@ -12,9 +12,20 @@ var AdminUserSchema = new mongoose.Schema({
 });
 
 AdminUserSchema.statics = {
+    findById: function (id, cb) {
+        return this.findOne({_id: id}, cb);
+    }
 
-    findByName: function (username, cb) {
+    ,findByName: function (username, cb) {
         return this.findOne({username: username}, cb);
+    }
+
+    ,changePassword: function (id, password, cb) {
+        return this.update({_id: id}, {
+            $set: {
+                password: password
+            }
+        }, cb);
     }
 
 };

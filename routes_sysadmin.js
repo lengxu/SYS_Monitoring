@@ -12,7 +12,7 @@ var adminindex = require('./routes/admin');
 var adminlogin = require('./routes/admin/login');
 var adminregister = require('./routes/admin/register');
 
-var adminhome = require('./routes/admin/home');
+var adminhome = require('./routes/admin/home/index');
 var adminlogout = require('./routes/admin/logout');
 var adminproject = require('./routes/admin/project/index');
 var adminauth = require('./lib/middlewares/adminauth');
@@ -34,7 +34,9 @@ module.exports = function(router) {
     router.get('/sysadmin/logout', adminlogout.index);
 
     //home
-    router.get('/sysadmin/home', adminauth.view(), adminhome.index);
+    router.get('/sysadmin/home/changepassword', adminauth.view(), adminhome.changepassword);
+    router.post('/sysadmin/home/dochangepassword', adminauth.view(), adminhome.dochangepassword);
+    router.get('/sysadmin/home/', adminauth.view(), adminhome.index);
 
 
     //项目管理
