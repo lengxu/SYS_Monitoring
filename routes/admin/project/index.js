@@ -10,15 +10,26 @@ let koaMongoosePagination = require('koa-mongoose-pagination'),
 //项目列表
 exports.showindex = function*() {
     var requestinfo = this.request.query;
+
+
+    var condition = {};
+
+    if (requestinfo.participantsid)
+    {
+        condition.participants={_id:requestinfo.participantsid};
+    }
+
     const resultsPerPage = config.paginate.resultsPerPage;
     const currentPage = requestinfo.page || 1; // You should use this.query.page here
     var result = yield ProjectModel.paginate({
-        // conditions: { 'status': -1 }, // Only enabled items
+        conditions: condition, // Only enabled items
         columns: '', // Retrieve only those columns
         sortBy: {'_id': -1}, // Sort by _id DESC
         limit: resultsPerPage,
         offset: (currentPage * resultsPerPage) - resultsPerPage
     });
+
+    console.log(result);
 
     yield adminbaserender(this, "admin/project/index", {
         title: '项目列表',
@@ -82,7 +93,6 @@ exports.detail = function*() {
     let info = this.params;
 
     var projectinfo = yield thunkify(ProjectModel.findByid, ProjectModel)(info.id);
-    console.log(projectinfo.participants);
 
     yield adminbaserender(this, "admin/project/detail", {
 

@@ -16,6 +16,7 @@ var adminhome = require('./routes/admin/home/index');
 var adminlogout = require('./routes/admin/logout');
 var adminproject = require('./routes/admin/project/index');
 var adminauth = require('./lib/middlewares/adminauth');
+var adminmember = require('./routes/admin/member/');
 
 
 module.exports = function(router) {
@@ -48,6 +49,9 @@ module.exports = function(router) {
     router.post('/sysadmin/project/doedit', adminauth.api(), adminproject.doedit);
     router.get('/sysadmin/project/:id?/detail', adminauth.view(), adminproject.detail);
     router.post('/sysadmin/project/doapprove', adminauth.api(), adminproject.doapprove);
+
+    //人员管理
+    router.get('/sysadmin/member/', adminauth.view(), adminmember.showindex);
 
 
 

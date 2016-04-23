@@ -40,6 +40,7 @@ ProjectSchema.statics = {
     findByid: function (id, cb) {
 
         var result = this.findOne({_id: id}, cb);
+        // result._castError;
         return result.populate('participants._id').exec(cb);
     },
 

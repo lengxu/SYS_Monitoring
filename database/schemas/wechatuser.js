@@ -1,7 +1,9 @@
 "use strict";
 
 let mongoose = require('mongoose');
-let dt = require('date-utils');
+let dt = require('date-utils'),
+    koamongoosePagination = require('koa-mongoose-pagination');
+
 
 
 var WechatUserSchema = new mongoose.Schema({
@@ -39,5 +41,8 @@ WechatUserSchema.statics = {
         return this.update({openid: openid}, {$set: {userinfo: userinfo}}, cb);
     }
 };
+
+
+WechatUserSchema.plugin(koamongoosePagination);
 
 module.exports = WechatUserSchema;
