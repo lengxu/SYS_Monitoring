@@ -29,6 +29,47 @@
 
 {{#section 'footer'}}
 <script>
+
+    function doupdatestatus(wechatuserid, status) {
+        $.ajax({
+            url: '/sysadmin/member/updatestatus',
+            type: 'post',
+            data: {wechatuserid: wechatuserid, status: status},
+            success: function (data, status) {
+                if (status == 'success') {
+                    if (data.retCode == 0) {
+                        alert("保存成功");
+                        location.reload();
+                    } else {
+                        alert(data.retMsg);
+                    }
+                }
+            },
+            error: function (data, status) {
+            }
+        });
+    }
+
+    function doupdatesendallprojectstatus(wechatuserid, status) {
+        $.ajax({
+            url: '/sysadmin/member/updatesendallprojectstatus',
+            type: 'post',
+            data: {wechatuserid: wechatuserid, status: status},
+            success: function (data, status) {
+                if (status == 'success') {
+                    if (data.retCode == 0) {
+                        alert("保存成功");
+                        location.reload();
+                    } else {
+                        alert(data.retMsg);
+                    }
+                }
+            },
+            error: function (data, status) {
+            }
+        });
+    }
+
     jQuery(document).ready(function () {
 
         TableAdvanced.init();
@@ -102,6 +143,20 @@
                         <td >{{userinfo.email}}</td>
 
                         <td ><a href="/sysadmin/project/index?participantsid={{_id}}" >查看项目</a>
+                            &nbsp;&nbsp;
+                            {{#ifCond status "==" -1 }}
+                            <a href="javascript:void(null)" onclick="doupdatestatus('{{openid}}',0)">取消冻结</a>
+                            {{else}}
+                            <a href="javascript:void(null)"
+                               onclick="doupdatestatus('{{openid}}',-1)">冻结</a>
+                            {{/ifCond }}
+                            &nbsp;&nbsp;
+                            {{#ifCond sendallprojectstatus "==" 0 }}
+                            <a href="javascript:void(null)" onclick="doupdatesendallprojectstatus('{{openid}}',-1)">取消发送所有</a>
+                            {{else}}
+                            <a href="javascript:void(null)"
+                               onclick="doupdatesendallprojectstatus('{{openid}}',0)">发送所有项目</a>
+                            {{/ifCond }}
                         </td>
 
                     </tr>

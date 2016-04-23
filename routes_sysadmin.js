@@ -52,6 +52,9 @@ module.exports = function(router) {
 
     //人员管理
     router.get('/sysadmin/member/', adminauth.view(), adminmember.showindex);
+    router.post('/sysadmin/member/updatestatus', adminauth.view(), adminmember.doupdatestatus);
+    router.post('/sysadmin/member/updatesendallprojectstatus', adminauth.view(), adminmember.doupdatesendallprojectstatus);
+
 
 
 
