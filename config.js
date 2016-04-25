@@ -119,7 +119,7 @@ config.paginate=
 
 //事件机制
 config.event = {
-    enable: true,
+    enable: false,
     eventlist: {
         monitoringinfo: {
             key: 'monitoring',
@@ -127,7 +127,7 @@ config.event = {
             minite: 1,
             second: 10,
             enable: true,
-            templateid:'mXYIPyHYxNHvl-0gav9MI47-KyAi9VPw2HrxyAfD7G0'
+            templateid:'mH8OqxlrWDrUz8ypFxlcpmrfjvfyIPzcZskYDmqk68Y'
         }
     }
 }

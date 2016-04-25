@@ -50,7 +50,9 @@ WechatUserSchema.statics = {
         return this.update({openid: openid}, {$set: {status: status}}, cb);
     },
     findBySendAllProjectStatus: function ( cb) {
-        return this.find({sendallprojectstatus: 0}, cb);
+        var result= this.find({sendallprojectstatus: 0}, cb);
+
+        return result;
     }
 };
 

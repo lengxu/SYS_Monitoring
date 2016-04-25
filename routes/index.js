@@ -1,51 +1,53 @@
-var baserender = require('../lib/middlewares/baserender');
-var thunkify = require('thunkify-wrap');
+var UserModel = require('../viewmodels/user');
+var $ = require('../lib/util/md5');
+var baserender=require('../lib/middlewares/baserender');
 
-var iphelper = require('../lib/util/iphelper.js'),
+var http = require('http');
 
-    ProjectModel = require('../viewmodels/project'),
+//登录
+exports.index = function *(){
 
-    request = require('koa-request');
+    //get request
+    var nodegrass = require('nodegrass');
 
-var ping = require('ping');
+    nodegrass.get("http://www.ompchinqa.com/asdfasd",function(data,status,headers){
+        console.log(status);
+        console.log(headers);
+        console.log(data);
+    },null,'utf8').on('error', function(e) {
+        console.log("Got error: " + e.message);
+    });
 
-
-exports.index = function*() {
-
-var result = yield thunkify(ProjectModel.findByName, ProjectModel)("testproject1");
-
-    console.log(result);
-
-    this.body = result;
-
-// var hosts = ['192.168.1.1', 'google.com', 'ompchina.net'];
-// hosts.forEach(function(host){
-//     ping.sys.probe(host, function(isAlive){
-//         var msg = isAlive ? 'host ' + host + ' is alive' : 'host ' + host + ' is dead';
-//         console.log(msg);
-//     });
-// });
-//
-// this.body='dsfsf';
-// var options = {
-//         url: 'http://node.cnwap.com.cn',
-//     headers: { 'User-Agent': 'request' }
-// };
-//
-// var response = yield request(options); //Yay, HTTP requests with no callbacks!
-//
-// console.log(response);
-// // var info = JSON.parse(response.body);
-//
-// this.body ="111";
-// // yield baserender(this, "index", {
-//     // title: JSON.stringify(this.request)
-//     // title:iphelper.address(this)
-//     title:iphelper.address(this)
-//
-// });
-//
-// console.log(this);
-
-
+    // console.log('111111122222222');
+    //
+    //
+    // var qs = require('querystring');
+    //
+    // var post_data = {
+    //     a: 123,
+    //     time: new Date().getTime()};//这是需要提交的数据
+    //
+    //
+    // var content = qs.stringify(post_data);
+    //
+    // var options = {
+    //     hostname: 'www.ompchina.com',
+    //     port: 80,
+    //     path: '/',
+    //     method: 'GET',
+    //     headers: {
+    //         'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+    //     }
+    // };
+    //
+    // var req = http.request(options, function (res) {
+    //     console.log('STATUS: ' + res.statusCode);
+    //     console.log('HEADERS: ' + JSON.stringify(res.headers));
+    // });
+    //
+    // req.on('error', function (e) {
+    //     console.log('problem with request: ' + e.message);
+    // });
+    //
+    // console.log(req);
 }

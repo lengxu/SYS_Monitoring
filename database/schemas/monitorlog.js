@@ -23,7 +23,7 @@ let MonitorlogSchema = new mongoose.Schema({
     lastmonitorstatus: {type: Number},
     responsetime:{type:Number},
     responsemessage:{type:String},
-    responsestatus:{type:String}
+    responsestatus:{type:Schema.Types.Mixed}
 });
 
 MonitorlogSchema.statics = {
