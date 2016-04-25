@@ -4,6 +4,8 @@ var ProjectModel = require('../../../viewmodels/project');
 var thunkify = require('thunkify-wrap');
 var adminbaserender = require('../../../lib/middlewares/adminbaserender');
 let koaMongoosePagination = require('koa-mongoose-pagination'),
+    monitoringinfo = require('../../../config').event.eventlist.monitoringinfo,
+    WechatAPI = require('../../../lib/Wechat/wechatapi'),
     config = require('../../../config');
 
 
@@ -135,6 +137,49 @@ exports.doapprove = function*() {
     var project = new ProjectModel(info);
 
     var result = yield thunkify(ProjectModel.updateParticipantStatus, ProjectModel)(info.id, info.wechatuserid, info.status);
+
+    console.log(result);
+    if(info.status==0)
+    {
+
+        var projectinfo = yield thunkify(ProjectModel.findByid, ProjectModel)(info.id);
+
+        //发送模板消息
+        console.log('66666666');
+
+        var templateId = monitoringinfo.templateid;
+
+        var topColor = '#FF0000'; // 顶部颜色
+
+        // URL置空，则在发送后,点击模板消息会进入一个空白页面（ios）, 或无法点击（android）
+        var data = {
+
+            "first": {
+                "value": "尊敬的" + projectinfo.name + "项目组同事，你们好！",
+                "color": "#173177"
+            },
+            "keyword1": {
+                "value": projectinfo.name,
+                "color": "#173177"
+            },
+            "keyword2": {
+                "value": '审核通过',
+                "color": "#FF0000"
+            },
+            "remark": {
+                "value": "请尽快解决",
+                "color": "#173177"
+            }
+
+        };
+
+        var openid = 'obz_jjijDaOTnppDpFmh_MgfTMls';
+        // var openid = info.wechatuserid;
+         result = yield * WechatAPI.sendTemplate(openid, templateId, 'http://www.ompchina.com', topColor, data);
+
+        console.log('77777777');
+
+    }
 
     this.send(null, 0, "保存成功");
 
