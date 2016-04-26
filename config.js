@@ -127,7 +127,8 @@ config.event = {
             minite: 1,
             second: 10,
             enable: true,
-            templateid:'mH8OqxlrWDrUz8ypFxlcpmrfjvfyIPzcZskYDmqk68Y'
+            monitortemplateid:'mH8OqxlrWDrUz8ypFxlcpmrfjvfyIPzcZskYDmqk68Y',
+            approvetemplateid:'8ywKTfOQ1goSifXXtScM7o3OdcEVpDK5Zwrb3rfvu1c'
         }
     }
 }
