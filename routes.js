@@ -4,7 +4,10 @@ var index = require('./routes/index');
 var login = require('./routes/login');
 var register = require('./routes/register');
 var home = require('./routes/home');
+var project = require('./routes/project/');
 var auth = require('./lib/middlewares/auth');
+var site = require('./lib/middlewares/siteoauth');
+
 
 
 /*var logout = require('./routes/logout');
@@ -17,16 +20,17 @@ module.exports = function(router) {
 	router.get('/', index.index);
 	router.get('/index', index.index);
 
-    //用户登录
-	router.get('/login', login.getlogin);
-	router.post('/login', login.postlogin);
-
-	//用户注册
-	router.get('/register', register.getregister);
-	router.post('/register', register.register);
+    // //用户登录
+	// router.get('/login', login.getlogin);
+	// router.post('/login', login.postlogin);
+    //
+	// //用户注册
+	// router.get('/register', register.getregister);
+	// router.post('/register', register.register);
 
 	//home
-	router.get('/home', auth.view(), home.index);
+	// router.get('/home', auth.view(), home.index);
 
+	router.get('/project/:id?/detail', site.view(), project.detail);
 
 }
