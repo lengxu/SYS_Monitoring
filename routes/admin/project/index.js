@@ -145,8 +145,6 @@ exports.doapprove = function*() {
         var projectinfo = yield thunkify(ProjectModel.findByid, ProjectModel)(info.id);
 
         //发送模板消息
-        console.log('66666666');
-
         var templateId = monitoringinfo.templateid;
 
         var topColor = '#FF0000'; // 顶部颜色

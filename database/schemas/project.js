@@ -134,7 +134,7 @@ ProjectSchema.methods.GetMonitortingStatus = function () {
         return '未监测';
     }
     else {
-        return '未知状态';
+        return '异常';
     }
 };
 
