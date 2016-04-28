@@ -34,7 +34,7 @@
       host : "139.196.243.209",
       ref  : "origin/dev",
       repo : "git@github.com:heshiliang/SYS_Monitoring.git",
-      path : "/www/web/monitor.ompchina.net/SYS_Monitoring/",
+      path : "/www/web/monitor.ompchina.net/SYS_Monitoring",
       "post-deploy" : "npm install ; pm2 startOrRestart bin/www --name 'SYS_Monitoring' --watch"
     }
 //  ,

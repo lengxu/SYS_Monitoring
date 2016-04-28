@@ -7,6 +7,8 @@ var http = require('http');
 //登录
 exports.index = function *(){
 
+
+    
     var qrcode = require('node-qrcode');
 
     qrcode({
