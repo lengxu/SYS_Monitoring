@@ -35,7 +35,7 @@
       ref  : "origin/master",
       repo : "git@github.com:heshiliang/SYS_Monitoring.git",
       path : "/www/web/monitor.ompchina.net/SYS_Monitoring",
-      "post-deploy" : "npm install ; pm2 startOrRestart bin/www --name 'SYS_Monitoring' --watch"
+      "post-deploy" : "npm install ; pm2 start bin/www --name 'SYS_Monitoring' --watch"
     }
 //  ,
 //    dev : {
