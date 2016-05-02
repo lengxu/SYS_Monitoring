@@ -31,7 +31,6 @@
   deploy : {
     production : {
       user : "root",
-      Password:'frank',
       host : "139.196.243.209",
       ref  : "origin/master",
       repo : "git@github.com:heshiliang/SYS_Monitoring.git",
