@@ -45,24 +45,8 @@ module.exports = function (router) {
 
     router.get('/member/project/', wechatoauth.infoview(), project.showindex);
 
-    // check route middleware
-    var pcCheck = function() {
-        return function*(next) {
-            var browser = require('beyond-lib/lib/browser');
-            var browserinfo = browser.parse(this.request.header["user-agent"]);
-            var requestinfo = this.params;
-
-            //判断微信跳转
-            if (!browserinfo.isMicroMessenger) {
-
-                this.redirect('/project/' + requestinfo.id + "/detail");
-
-                return;
-            }
-            yield next;
-        }
-    };
-    router.get('/member/project/:id?/detail',pcCheck(), wechatoauth.infoview(), project.detail);
+    
+    router.get('/member/project/:id?/detail',project.pcCheck(), wechatoauth.infoview(), project.detail);
     router.post('/member/project/doapply', wechatoauth.infoapi(), project.doapply);
 
     //用户信息

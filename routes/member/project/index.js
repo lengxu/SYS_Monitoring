@@ -92,6 +92,24 @@ exports.detail = function*() {
 
 }
 
+// check route middleware
+exports.pcCheck = function() {
+    return function*(next) {
+        var browser = require('beyond-lib/lib/browser');
+        var browserinfo = browser.parse(this.request.header["user-agent"]);
+        var requestinfo = this.params;
+
+        //判断微信跳转
+        if (!browserinfo.isMicroMessenger) {
+
+            this.redirect('/project/' + requestinfo.id + "/detail");
+
+            return;
+        }
+        yield next;
+    }
+};
+
 //提交申请
 exports.doapply = function*() {
     
