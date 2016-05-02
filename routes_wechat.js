@@ -38,11 +38,31 @@ module.exports = function (router) {
     //api_ip:
     router.get('/wechat/ip/getIp', wechatip.getIp);
 
+
+
     //未登陆pc端查看
     router.get('/project/:id?/detail',  project.detail);
 
     router.get('/member/project/', wechatoauth.infoview(), project.showindex);
-    router.get('/member/project/:id?/detail', wechatoauth.infoview(), project.detail);
+
+    // check route middleware
+    var pcCheck = function() {
+        return function*(next) {
+            var browser = require('beyond-lib/lib/browser');
+            var browserinfo = browser.parse(this.request.header["user-agent"]);
+            var requestinfo = this.params;
+
+            //判断微信跳转
+            if (!browserinfo.isMicroMessenger) {
+
+                this.redirect('/project/' + requestinfo.id + "/detail");
+
+                return;
+            }
+            yield next;
+        }
+    };
+    router.get('/member/project/:id?/detail',pcCheck(), wechatoauth.infoview(), project.detail);
     router.post('/member/project/doapply', wechatoauth.infoapi(), project.doapply);
 
     //用户信息
