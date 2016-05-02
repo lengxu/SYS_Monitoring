@@ -11,13 +11,13 @@ exports.index = function *(){
     
     var qrcode = require('node-qrcode');
 
-    qrcode({
-        text: 'http://weibo.com',
-        size: 200,
-        qrcodePath: './public/upload/qrcode/qrcode22.png'
-    }).then(function(qrcodePath) {
-        console.log(qrcodePath);  // balabala/node-qrcode/qrcode.png
-    });
+    // qrcode({
+    //     text: 'http://weibo.com',
+    //     size: 200,
+    //     qrcodePath: './public/upload/qrcode/qrcode22.png'
+    // }).then(function(qrcodePath) {
+    //     console.log(qrcodePath);  // balabala/node-qrcode/qrcode.png
+    // });
 
-    this.body='44444';
+    this.body='555555';
 }
