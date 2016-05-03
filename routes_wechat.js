@@ -15,11 +15,8 @@ var wechatoauth = require('./lib/middlewares/wechatoauth');
 module.exports = function (router) {
 
     router.get('/wechat/', wechatoauth.view(), wechat.getwechatlogin);
-
     router.get('/wechat/callback', wechat.callback);
-
     router.get('/wechat/settestlogin', wechat.settestlogin);
-
 
     //测试上传多媒体文件
     router.get('/wechat/media', wechatmedia.index);
@@ -38,14 +35,9 @@ module.exports = function (router) {
     //api_ip:
     router.get('/wechat/ip/getIp', wechatip.getIp);
 
-
-
     //未登陆pc端查看
     router.get('/project/:id?/detail',  project.detail);
-
     router.get('/member/project/', wechatoauth.infoview(), project.showindex);
-
-    
     router.get('/member/project/:id?/detail',project.pcCheck(), wechatoauth.infoview(), project.detail);
     router.post('/member/project/doapply', wechatoauth.infoapi(), project.doapply);
 
@@ -55,9 +47,6 @@ module.exports = function (router) {
     router.post('/member/info/doadd', wechatoauth.api(), member.doadd);
     router.get('/member/info/edit', wechatoauth.infoview(), member.edit);
     router.post('/member/info/doedit', wechatoauth.infoapi(), member.doedit);
-
-
-
 
 
 

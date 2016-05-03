@@ -6,9 +6,6 @@ var http = require('http');
 
 //登录
 exports.index = function *(){
-
-
-    
     var qrcode = require('node-qrcode');
 
     // qrcode({
@@ -19,5 +16,5 @@ exports.index = function *(){
     //     console.log(qrcodePath);  // balabala/node-qrcode/qrcode.png
     // });
 
-    this.body='555555';
+    this.body='66666666';
 }
