@@ -16,5 +16,5 @@ exports.index = function *(){
     //     console.log(qrcodePath);  // balabala/node-qrcode/qrcode.png
     // });
 
-    this.body='66666666';
+    this.body='7777';
 }

@@ -28,19 +28,19 @@ exports.detail = function*() {
 
     var qrcodeurl='';
 
-    // //生成二维码
-    // var qrcode = require('node-qrcode'),
-    //     siteinfo = require('../../config').siteinfo;
-    //
-    // qrcode({
-    //     text: siteinfo.host+'/member/project/'+info.id+'/detail',
-    //     size: 200,
-    //     qrcodePath: './public/upload/qrcode/'+info.id+'.png'
-    // }).then(function(qrcodePath) {
-    //     console.log('222'+qrcodePath);  // balabala/node-qrcode/qrcode.png
-    //     qrcodeurl=qrcodePath;
-    // });
-    // console.log('1111'+qrcodeurl);  // balabala/node-qrcode/qrcode.png
+    //生成二维码
+    var qrcode = require('node-qrcode'),
+        siteinfo = require('../../config').siteinfo;
+
+    qrcode({
+        text: siteinfo.host+'/member/project/'+info.id+'/detail',
+        size: 200,
+        qrcodePath: './public/upload/qrcode/'+info.id+'.png'
+    }).then(function(qrcodePath) {
+        console.log('222'+qrcodePath);  // balabala/node-qrcode/qrcode.png
+        qrcodeurl=qrcodePath;
+    });
+    console.log('1111'+qrcodeurl);  // balabala/node-qrcode/qrcode.png
 
     yield siterender(this, "project/index", {
         title: '项目详情',
