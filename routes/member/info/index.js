@@ -23,13 +23,17 @@ exports.showadd = function*() {
 exports.doadd = function*() {
     var info = this.request.body;
 
+    console.log(info);
+
     var wechatuser = this.session.wechatUserInfo;
 
     wechatuser.userinfo=info;
 
     wechatuser.userinf.updatetime=new Date().toFormat("YYYY-MM-DD HH24:MI:SS");
 
+    console.log('1111');
     yield thunkify(WechatUserModel.updateUserInfoByOpenID,WechatUserModel)(wechatuser.openid,info);
+    console.log('2222');
 
     this.send(null, 0, "保存成功");
 }
