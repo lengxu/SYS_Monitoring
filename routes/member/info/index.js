@@ -29,7 +29,7 @@ exports.doadd = function*() {
 
     wechatuser.userinfo=info;
 
-    wechatuser.userinf.updatetime=new Date().toFormat("YYYY-MM-DD HH24:MI:SS");
+    wechatuser.userinfo.updatetime=new Date().toFormat("YYYY-MM-DD HH24:MI:SS");
     console.log(wechatuser);
 
     console.log('1111');
