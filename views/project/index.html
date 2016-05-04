@@ -16,7 +16,7 @@
     jQuery(document).ready(function () {
 
         var qrcode = new QRCode(document.getElementById("qrcode"), {
-            text: "http://jindo.dev.naver.com/collie",
+            text: '{{qrcodedata}}',
             width: 128,
             height: 128,
             colorDark : "#000000",
@@ -42,121 +42,44 @@
     <div class="container-fluid promo-page">
 
         <!-- BEGIN PAGE CONTENT-->
-
         <div class="row-fluid">
 
             <div class="span12">
 
-                <div class="block-grey">
+                <!--BEGIN TABS-->
 
-                    <div class="container">
+                <div class="tab-content">
 
-                        <div id="promo_carousel" class="carousel slide">
+                    <div id="tab_1_2" class="tab-pane profile-classic row-fluid active">
 
-                            <div class="carousel-inner">
 
-                                <div class="active item">
+                        <ul class="unstyled span10">
 
-                                    <div class="row-fluid">
+                            <li><div id="qrcode"></div></li>
 
-                                        <div class="span7 margin-bottom-20 margin-top-20 animated rotateInUpRight">
+                            {{#with projectinfo}}
 
-                                            <h1>Welcome to Metronic..</h1>
+                            <li><span>项目名称:</span> {{name}}<input type="hidden" id="hdprojectid" value="{{projectinfo._id}}" /></li>
 
-                                            <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis
-                                                praesentium voluptatum deleniti atque corrupti quos dolores et quas
-                                                molestias excepturi sint occaecati cupiditate non provident, similique.
-                                                Pellentesque viverra vehicula sem ut volutpat. Lorem ipsum dolor sit
-                                                amet, consectetur adipiscing elit. Ut non libero magna. Sed et quam
-                                                lacus. Fusce condimentum eleifend enim a feugiat.</p>
+                            <li><span>部门:</span> {{department}}</li>
 
-                                            <p>Lunt in culpa qui officia deserunt mollitia animi, id est laborum et
-                                                dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio
-                                                lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut non libero
-                                                consectetur adipiscing elit magna. Sed et quam lacus. Fusce condimentum
-                                                eleifend enim a feugiat.</p>
+                            <li><span>网站地址:</span><a href="{{siteurl}}" target="_blank"> {{siteurl}}</a></li>
 
-                                            <a href="index.html" class="btn red big xlarge">
+                            <li><span>状态:</span> {{GetStatus}}</li>
 
-                                                Take a tour
+                            {{/with}}
 
-                                                <i class="m-icon-big-swapright m-icon-white"></i>
-
-                                            </a>
-
-                                        </div>
-
-                                        <div class="span5 animated rotateInDownLeft">
-
-                                            <div id="qrcode"></div>
-
-                                        </div>
-
-                                    </div>
-
-                                </div>
-
-                                <div class="item">
-
-                                    <div class="row-fluid">
-
-                                        <div class="span5 animated rotateInUpRight">
-
-                                            <a href="index.html"><img src="/member/image/img1_2.png" alt=""></a>
-
-                                        </div>
-
-                                        <div class="span7 margin-bottom-20 animated rotateInDownLeft">
-
-                                            <h1>Buy Metronic Today..</h1>
-
-                                            <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis
-                                                praesentium voluptatum deleniti atque corrupti quos dolores et quas
-                                                molestias excepturi sint occaecati cupiditate non provident, similique.
-                                                Pellentesque viverra vehicula sem ut volutpat. Lorem ipsum dolor sit
-                                                amet, consectetur adipiscing elit. Ut non libero magna. Sed et quam
-                                                lacus. Fusce condimentum eleifend enim a feugiat.</p>
-
-                                            <p>Lunt in culpa qui officia deserunt mollitia animi, id est laborum et
-                                                dolorum fuga. Ut non libero consectetur adipiscing elit magna. Sed et
-                                                quam lacus. Fusce condimentum eleifend enim a feugiat.</p>
-
-                                            <a href="index.html" class="btn green big xlarge">
-
-                                                But it today
-
-                                                <i class="m-icon-big-swapright m-icon-white"></i>
-
-                                            </a>
-
-                                        </div>
-
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                            <a class="carousel-control left" href="#promo_carousel" data-slide="prev">
-
-                                <i class="m-icon-big-swapleft m-icon-white"></i>
-
-                            </a>
-
-                            <a class="carousel-control right" href="#promo_carousel" data-slide="next">
-
-                                <i class="m-icon-big-swapright m-icon-white"></i>
-
-                            </a>
-
-                        </div>
+                        </ul>
 
                     </div>
 
                 </div>
 
-            </div>
 
+                <!--END TABS-->
+
+
+            </div>
         </div>
 
     </div>

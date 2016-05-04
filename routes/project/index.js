@@ -27,10 +27,10 @@ exports.detail = function*() {
     var projectinfo = yield thunkify(ProjectModel.findByid, ProjectModel)(info.id);
 
 
-    var fs = require('co-fs');
+    // var fs = require('co-fs');
 
-    var hasdir = yield fs.exists('/public/upload/qrcode/'+info.id+'.png');
-    var qrcodeurl='';
+    // var hasdir = yield fs.exists('/public/upload/qrcode/'+info.id+'.png');
+    // var qrcodeurl='';
 
     // if (!hasdir) {
     //
@@ -52,7 +52,8 @@ exports.detail = function*() {
     // }
     yield siterender(this, "project/index", {
         title: '项目详情',
-        projectinfo: projectinfo
+        projectinfo: projectinfo,
+        qrcodedata:siteinfo.host + '/member/project/' + info.id + '/detail'
 
     });
 }
