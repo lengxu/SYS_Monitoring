@@ -41,8 +41,11 @@ exports.callback = function*() {
     //检查是否存在该用户
     var result = yield thunkify(WechatUserModel.findByOpenID, WechatUserModel)(wechatuser.openid);
 
+    console.log(result);
+
     if (result) {
 
+        console.log('111111');
         wechatuser.updatetime = new Date().toFormat("YYYY-MM-DD HH24:MI:SS");
 
         this.session.wechatUserInfo = wechatuser;
@@ -59,6 +62,8 @@ exports.callback = function*() {
 
         return;
     }
+
+    console.log('2222222');
 
     wechatuser = new WechatUserModel(wechatuser);
 
