@@ -27,6 +27,8 @@ exports.callback = function*() {
 
     wechatuser.openid = openid;
 
+    console.log(info);
+
     if (config.wechatinfo.scope == 'snsapi_userinfo') {
 
         let options = {

@@ -24,7 +24,8 @@ exports.detail = function*() {
     }
 
     //获取项目详情
-    var projectinfo = yield thunkify(ProjectModel.findByid, ProjectModel)(info.id);
+    var projectinfo = yield thunkify(ProjectModel.findByid, ProjectModel)(info.id),
+            siteinfo = require('../../config').siteinfo;
 
 
     // var fs = require('co-fs');
@@ -50,6 +51,7 @@ exports.detail = function*() {
     //     console.log('1111' + qrcodeurl);  // balabala/node-qrcode/qrcode.png
     //
     // }
+    console.log(info);
     yield siterender(this, "project/index", {
         title: '项目详情',
         projectinfo: projectinfo,
