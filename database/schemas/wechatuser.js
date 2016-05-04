@@ -41,9 +41,6 @@ WechatUserSchema.statics = {
         return this.findOne({_id: id}, cb);
     },
     updateUserInfoByOpenID: function (openid, userinfo, cb) {
-        console.log('33333=='+openid);
-        console.log('33333=='+userinfo);
-
         return this.update({openid: openid}, {$set: {userinfo: userinfo}}, cb);
     },
     updateUserSendAllProjectStatus: function (openid, status, cb) {

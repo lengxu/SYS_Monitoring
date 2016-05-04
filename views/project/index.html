@@ -42,44 +42,71 @@
     <div class="container-fluid promo-page">
 
         <!-- BEGIN PAGE CONTENT-->
+
         <div class="row-fluid">
 
             <div class="span12">
 
-                <!--BEGIN TABS-->
+                <div class="block-grey">
 
-                <div class="tab-content">
+                    <div class="container">
 
-                    <div id="tab_1_2" class="tab-pane profile-classic row-fluid active">
+                        <div id="promo_carousel" class="carousel slide">
+
+                            <div class="carousel-inner">
+
+                                <div class="active item">
+
+                                    <div class="row-fluid">
+
+                                        <div class="span5 animated rotateInDownLeft">
+
+                                            <div id="qrcode"></div>
+
+                                        </div>
+
+                                        <div class="span7 margin-bottom-20 margin-top-20 animated rotateInUpRight">
 
 
-                        <ul class="unstyled span10">
+                                            <ul class="unstyled span10">
 
-                            <li><div id="qrcode"></div></li>
+                                                {{#with projectinfo}}
 
-                            {{#with projectinfo}}
+                                                <li><span>项目名称:</span> {{name}}<input type="hidden" id="hdprojectid"
+                                                                                      value="{{projectinfo._id}}"/></li>
 
-                            <li><span>项目名称:</span> {{name}}<input type="hidden" id="hdprojectid" value="{{projectinfo._id}}" /></li>
+                                                <li><span>部门:</span> {{department}}</li>
 
-                            <li><span>部门:</span> {{department}}</li>
+                                                <li><span>网站地址:</span><a href="{{siteurl}}" target="_blank"> {{siteurl}}</a></li>
 
-                            <li><span>网站地址:</span><a href="{{siteurl}}" target="_blank"> {{siteurl}}</a></li>
+                                                <li><span>状态:</span> {{GetStatus}}</li>
 
-                            <li><span>状态:</span> {{GetStatus}}</li>
+                                                {{/with}}
 
-                            {{/with}}
+                                            </ul>
 
-                        </ul>
+
+
+
+                                        </div>
+
+
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                        </div>
 
                     </div>
 
                 </div>
 
-
-                <!--END TABS-->
-
-
             </div>
+
         </div>
 
     </div>
