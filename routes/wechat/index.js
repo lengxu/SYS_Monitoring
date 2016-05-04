@@ -51,25 +51,27 @@ exports.callback = function*() {
 
         result = yield thunkify(result.update, result)(result);
 
-        if (info.returnurl && info.returnurl != '') {
 
-            this.redirect(info.returnurl);
-
-        } else {
-            this.body = result;
-        }
-
-        return;
     }
-    console.log('22222222');
+    else {
+        console.log('22222222');
 
-    wechatuser = new WechatUserModel(wechatuser);
+        wechatuser = new WechatUserModel(wechatuser);
 
-    yield thunkify(new WechatUserModel(wechatuser).save, wechatuser);
+        yield thunkify(new WechatUserModel(wechatuser).save, wechatuser);
 
-    this.body = wechatuser;
+        this.session.wechatUserInfo = wechatuser;
+    }
 
-    this.session.wechatUserInfo = wechatuser;
+    if (info.returnurl && info.returnurl != '') {
+
+        this.redirect(info.returnurl);
+
+    } else {
+        this.body = result;
+    }
+
+    return;
 
 }
 
