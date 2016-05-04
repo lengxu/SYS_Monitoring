@@ -43,7 +43,6 @@ exports.callback = function*() {
     var result = yield thunkify(WechatUserModel.findByOpenID, WechatUserModel)(wechatuser.openid);
 
     if (result) {
-        console.log('1111111');
 
         result.updatetime = new Date().toFormat("YYYY-MM-DD HH24:MI:SS");
 
@@ -54,7 +53,6 @@ exports.callback = function*() {
 
     }
     else {
-        console.log('22222222');
 
         wechatuser = new WechatUserModel(wechatuser);
 

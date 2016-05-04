@@ -67,7 +67,7 @@ var FormValidation = function () {
                     success1.show();
                     error1.hide();
                     var data = $("#info-form").serialize();
-
+                    alert(data);
                     $.ajax({
                         url: '/member/info/doadd',
                         type: 'post',
