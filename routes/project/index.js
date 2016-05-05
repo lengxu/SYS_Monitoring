@@ -51,7 +51,6 @@ exports.detail = function*() {
     //     console.log('1111' + qrcodeurl);  // balabala/node-qrcode/qrcode.png
     //
     // }
-    console.log(info);
     yield siterender(this, "project/index", {
         title: '项目详情',
         projectinfo: projectinfo,

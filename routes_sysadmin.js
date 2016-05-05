@@ -49,6 +49,7 @@ module.exports = function(router) {
     router.post('/sysadmin/project/doedit', adminauth.api(), adminproject.doedit);
     router.get('/sysadmin/project/:id?/detail', adminauth.view(), adminproject.detail);
     router.post('/sysadmin/project/doapprove', adminauth.api(), adminproject.doapprove);
+    router.get('/sysadmin/project/:projectid?/monitor', adminauth.view(), adminproject.showmonitor);
 
     //人员管理
     router.get('/sysadmin/member/', adminauth.view(), adminmember.showindex);

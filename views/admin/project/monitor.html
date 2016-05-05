@@ -51,7 +51,7 @@
 
             <div class="portlet-title">
 
-                <div class="caption"><i class="icon-globe"></i>项目列表</div>
+                <div class="caption"><i class="icon-globe"></i>监控日志列表</div>
 
             </div>
 
@@ -63,17 +63,13 @@
 
                     <tr>
 
-                        <th>项目名称</th>
+                        <th>状态值</th>
 
-                        <th>状态</th>
+                        <th>响应时间</th>
 
-                        <th class="hidden-480">部门</th>
+                        <th class="hidden-480">监测时间</th>
 
-                        <th class="hidden-480">项目URL</th>
-
-                        <th class="hidden-480">最后监测时间</th>
-
-                        <th class="hidden-480">是否开启</th>
+                        <th class="hidden-480">错误消息</th>
 
                         <th >操作</th>
 
@@ -85,22 +81,15 @@
                     {{#items}}
                     <tr>
 
-                        <td>{{name}}</td>
+                        <td>{{responsestatus}}</td>
 
-                        <td>{{GetMonitortingStatus}}</td>
+                        <td>{{responsetime}}</td>
 
-                        <td class="hidden-480">{{department}}</td>
+                        <td class="hidden-480">{{GetLstMonitorStatus}}</td>
 
-                        <td class="hidden-480"><a href="{{siteurl}}" target="_blank">点击访问</a></td>
+                        <td class="hidden-480">{{responsemessage}}</td>
 
-                        <td class="hidden-480">{{GetLastmonitortime}}</td>
-
-                        <td class="hidden-480">{{GetStatus}}</td>
-
-                        <td ><a href="/member/project/{{_id}}/detail" target="_blank">打开项目</a>&nbsp;&nbsp;&nbsp;&nbsp;
-                            <a href="/sysadmin/project/{{_id}}/detail" target="_blank">详情</a>&nbsp;&nbsp;
-                            <a href="/sysadmin/project/{{projectinfo._id}}/monitor" target="_blank">监控日志</a>&nbsp;&nbsp;
-                            <a href="/sysadmin/project/{{_id}}/edit" target="_blank">修改</a>
+                        <td ><a href="/admin/project/{{_id}}/monitor" target="_blank">消息发送情况</a>&nbsp;&nbsp;&nbsp;&nbsp;
                         </td>
 
                     </tr>

@@ -145,3 +145,26 @@ exports.doapprove = function*() {
     this.send(null, 0, "保存成功");
 
 }
+
+
+//监控日志列表
+exports.showmonitor = function*() {
+    let info = this.params;
+    var requestinfo = this.request.query;
+    const resultsPerPage = config.paginate.resultsPerPage;
+    const currentPage = requestinfo.page || 1; // You should use this.query.page here
+    var result = yield MonitorlogModel.paginate({
+        // columns: '', // Retrieve only those columns
+        conditions: {'projectinfo._id':info.projectid},
+        sortBy: {'_id': -1}, // Sort by _id DESC
+        limit: resultsPerPage,
+        offset: (currentPage * resultsPerPage) - resultsPerPage
+    });
+    yield baserender(this, "admin/project/monitor", {
+        title: '项目_监控日志',
+        menuinfo:{project:"active",project_first:"active"},
+        totalRows: result.count,
+        items: result.data,
+        pagination: {page: currentPage, limit: resultsPerPage, totalRows: result.count}
+    });
+}

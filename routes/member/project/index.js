@@ -1,6 +1,7 @@
 'use strict';
 
 var ProjectModel = require('../../../viewmodels/project'),
+    MonitorlogModel=require('../../../viewmodels/monitorlog'),
     WechatUserModel = require('../../../viewmodels/wechatuser');
 var thunkify = require('thunkify-wrap');
 var baserender = require('../../../lib/middlewares/baserender'),
@@ -92,6 +93,27 @@ exports.detail = function*() {
 
 }
 
+//监控日志列表
+exports.showmonitor = function*() {
+    let info = this.params;
+    var requestinfo = this.request.query;
+    const resultsPerPage = config.paginate.resultsPerPage;
+    const currentPage = requestinfo.page || 1; // You should use this.query.page here
+    var result = yield MonitorlogModel.paginate({
+        // columns: '', // Retrieve only those columns
+        conditions: {'projectinfo._id':info.projectid},
+        sortBy: {'_id': -1}, // Sort by _id DESC
+        limit: resultsPerPage,
+        offset: (currentPage * resultsPerPage) - resultsPerPage
+    });
+    yield baserender(this, "member/project/monitor", {
+        title: '我的项目_监控日志',
+        menuinfo:{project:"active",project_first:"active"},
+        totalRows: result.count,
+        items: result.data,
+        pagination: {page: currentPage, limit: resultsPerPage, totalRows: result.count}
+    });
+}
 // check route middleware
 exports.pcCheck = function() {
     return function*(next) {

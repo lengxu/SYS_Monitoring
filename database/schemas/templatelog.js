@@ -19,10 +19,15 @@ let TemplatelogSchema = new mongoose.Schema({
         name:{type:String},
         siteurl:{type:String},
     },
-    openid: {type: String},
+    wechatuserinfo: {
+        openid:{type:String},
+        nickname:{type:String},
+        name: {type: String}
+    },
     templateId: {type: String},
     addtime:{type:Date},
-    sendresult:{type:String}
+    sendresult:{type:String},
+    monitorloginfoId:{type:String}
 });
 
 TemplatelogSchema.statics = {

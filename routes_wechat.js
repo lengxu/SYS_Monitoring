@@ -40,6 +40,7 @@ module.exports = function (router) {
     router.get('/member/project/', wechatoauth.infoview(), project.showindex);
     router.get('/member/project/:id?/detail',project.pcCheck(), wechatoauth.infoview(), project.detail);
     router.post('/member/project/doapply', wechatoauth.infoapi(), project.doapply);
+    router.get('/member/project/:projectid?/monitor', wechatoauth.view(), project.showmonitor);
 
     //用户信息
     router.get('/member/info/detail', wechatoauth.infoview(), member.detail);

@@ -38,6 +38,9 @@ MonitorlogSchema.methods.GetResponseStatus = function () {
     return this.responsestatus;
 };
 
+MonitorlogSchema.methods.GetLstMonitorStatus = function () {
+    return moment(this.lastmonitortime).format('YYYY-MM-DD HH:MM:SS');
+};
 
 MonitorlogSchema.plugin(koamongoosePagination);
 
