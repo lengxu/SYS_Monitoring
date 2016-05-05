@@ -1,6 +1,7 @@
 'use strict';
 
-var ProjectModel = require('../../../viewmodels/project');
+var ProjectModel = require('../../../viewmodels/project'),
+    MonitorlogModel= require('../../../viewmodels/monitorlog');
 var thunkify = require('thunkify-wrap');
 var adminbaserender = require('../../../lib/middlewares/adminbaserender');
 let koaMongoosePagination = require('koa-mongoose-pagination'),
@@ -149,12 +150,12 @@ exports.doapprove = function*() {
 
 //监控日志列表
 exports.showmonitor = function*() {
-    console.log('111111111');
 
     let info = this.params;
     var requestinfo = this.request.query;
     const resultsPerPage = config.paginate.resultsPerPage;
     const currentPage = requestinfo.page || 1; // You should use this.query.page here
+
     var result = yield MonitorlogModel.paginate({
         // columns: '', // Retrieve only those columns
         conditions: {'projectinfo._id':info.projectid},
@@ -162,8 +163,8 @@ exports.showmonitor = function*() {
         limit: resultsPerPage,
         offset: (currentPage * resultsPerPage) - resultsPerPage
     });
-    console.log('222222222');
-    yield baserender(this, "admin/project/monitor", {
+    console.log(result);
+    yield adminbaserender(this, "admin/project/monitor", {
         title: '项目_监控日志',
         menuinfo:{project:"active",project_first:"active"},
         totalRows: result.count,

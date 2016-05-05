@@ -2,6 +2,7 @@
 
 let mongoose = require('mongoose'),
     Schema=mongoose.Schema,
+    moment = require('moment'),
     koamongoosePagination = require('koa-mongoose-pagination');
 
 
@@ -38,7 +39,7 @@ MonitorlogSchema.methods.GetResponseStatus = function () {
     return this.responsestatus;
 };
 
-MonitorlogSchema.methods.GetLstMonitorStatus = function () {
+MonitorlogSchema.methods.GetLstMonitorTime = function () {
     return moment(this.lastmonitortime).format('YYYY-MM-DD HH:MM:SS');
 };
 
