@@ -34,8 +34,6 @@ node_modules
 
 # Config File
 config.js
-
-
 #webstorm idea directory
 .idea
 
