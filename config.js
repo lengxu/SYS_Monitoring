@@ -119,7 +119,7 @@ config.paginate=
 
 //事件机制
 config.event = {
-    enable: true,
+    enable: false,
     eventlist: {
         monitoringinfo: {
             key: 'monitoring',

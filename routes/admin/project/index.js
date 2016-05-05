@@ -149,6 +149,8 @@ exports.doapprove = function*() {
 
 //监控日志列表
 exports.showmonitor = function*() {
+    console.log('111111111');
+
     let info = this.params;
     var requestinfo = this.request.query;
     const resultsPerPage = config.paginate.resultsPerPage;
@@ -160,6 +162,7 @@ exports.showmonitor = function*() {
         limit: resultsPerPage,
         offset: (currentPage * resultsPerPage) - resultsPerPage
     });
+    console.log('222222222');
     yield baserender(this, "admin/project/monitor", {
         title: '项目_监控日志',
         menuinfo:{project:"active",project_first:"active"},
