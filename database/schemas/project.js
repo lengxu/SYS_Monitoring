@@ -57,7 +57,7 @@ ProjectSchema.statics = {
     //更新项目
     updateProjectinfo: function (Projectinfo, cb) {
 
-        console.log(Projectinfo.name);
+        console.log(Projectinfo);
         return this.update({_id: Projectinfo._id},
             {
                 $set: {

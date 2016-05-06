@@ -40,7 +40,6 @@ MonitorlogSchema.methods.GetResponseStatus = function () {
 };
 
 MonitorlogSchema.methods.GetLstMonitorTime = function () {
-    console.log(this.lastmonitortime);
 
     return this.lastmonitortime.toFormat("YYYY-MM-DD HH24:MI:SS");
 };
