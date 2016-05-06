@@ -85,7 +85,7 @@ ProjectSchema.statics = {
     //获取监测项目
     findMonitorProject: function (monitortime, cb) {
 
-        var result = this.find({status: 0}, cb);
+        var result = this.find({status: 0,starttime:{$lte:new Date().toFormat("YYYY-MM-DD HH24:MI:SS")}}, cb);
 
         return result.populate('participants._id').exec(cb);
     },
@@ -160,7 +160,11 @@ ProjectSchema.methods.GetStarttime = function () {
 };
 
 ProjectSchema.methods.GetLastmonitortime = function () {
-    return moment(this.lastmonitortime).format('YYYY-MM-DD HH:MM:SS');
+    if (this.lastmonitortime) {
+        return moment(this.lastmonitortime).format('YYYY-MM-DD HH:MM:SS');
+    }else {
+        return '';
+    }
 };
 
 

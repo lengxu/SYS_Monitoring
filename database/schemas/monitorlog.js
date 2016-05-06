@@ -40,7 +40,9 @@ MonitorlogSchema.methods.GetResponseStatus = function () {
 };
 
 MonitorlogSchema.methods.GetLstMonitorTime = function () {
-    return moment(this.lastmonitortime).format('YYYY-MM-DD HH:MM:SS');
+    console.log(this.lastmonitortime);
+
+    return this.lastmonitortime.toFormat("YYYY-MM-DD HH24:MI:SS");
 };
 
 MonitorlogSchema.plugin(koamongoosePagination);
