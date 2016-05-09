@@ -109,8 +109,8 @@ exports.detail = function*() {
             maxchartvalue=item.responsetime+100;
         }
 
-        charttimedata.push("'"+item.lastmonitortime.toFormat('YYYY-MM-DD HH24:MI:SS')+"'");
-        chartvaluedata.push(item.responsetime);
+        charttimedata.unshift("'"+item.lastmonitortime.toFormat('YYYY-MM-DD HH24:MI:SS')+"'");
+        chartvaluedata.unshift(item.responsetime);
         });
 
     yield adminbaserender(this, "admin/project/detail", {
