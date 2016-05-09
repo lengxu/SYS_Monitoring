@@ -31,6 +31,9 @@ MonitorlogSchema.statics = {
 
     findByProjectId: function (projectid, cb) {
         return this.findOne({'projectinfo._id': projectid}, cb);
+    },
+    findTopByProjectId: function (projectid,topcount, cb) {
+        return this.find({'projectinfo._id': projectid},null,{limit:topcount,sort: {_id: -1}}, cb);
     }
 
 };
@@ -39,9 +42,9 @@ MonitorlogSchema.methods.GetResponseStatus = function () {
     return this.responsestatus;
 };
 
-MonitorlogSchema.methods.GetLstMonitorTime = function () {
+MonitorlogSchema.methods.GetLastMonitorTime = function () {
 
-    return this.lastmonitortime.toFormat("YYYY-MM-DD HH24:MI:SS");
+    return this.lastmonitortime.toFormat('YYYY-MM-DD HH24:MI:SS');
 };
 
 MonitorlogSchema.plugin(koamongoosePagination);
