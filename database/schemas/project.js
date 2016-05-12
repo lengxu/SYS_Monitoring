@@ -28,7 +28,13 @@ let ProjectSchema = new mongoose.Schema({
         // _wechatuserobjectid: {type:String},
         _id: {type: Schema.Types.ObjectId, ref: 'WechatUser'},
         status: {type: Number, default: -1}
+    }],
+    statistics: [{
+        name: {type: Number},
+        value: {type: Number, default: 1},
+        _id: false
     }]
+
 });
 
 ProjectSchema.statics = {
@@ -50,6 +56,11 @@ ProjectSchema.statics = {
         return result.populate('participants._id').exec(cb);
     },
 
+    findByidAndMonitorstatus: function (id, status, cb) {
+        return this.findOne({"_id": id, "statistics.status": monitorstatus},cb);
+
+    },
+
     updateParticipants: function (id, participants, cb) {
         return this.update({_id: id}, {$addToSet: {participants: participants}}, cb);
     },
@@ -57,7 +68,6 @@ ProjectSchema.statics = {
     //更新项目
     updateProjectinfo: function (Projectinfo, cb) {
 
-        console.log(Projectinfo);
         return this.update({_id: Projectinfo._id},
             {
                 $set: {
@@ -85,18 +95,44 @@ ProjectSchema.statics = {
     //获取监测项目
     findMonitorProject: function (monitortime, cb) {
 
-        var result = this.find({status: 0,starttime:{$lte:new Date().toFormat("YYYY-MM-DD HH24:MI:SS")}}, cb);
-
+        var result = this.find({status: 0, starttime: {$lte: new Date().toFormat("YYYY-MM-DD HH24:MI:SS")}}, cb);
         return result.populate('participants._id').exec(cb);
     },
 
-    updateProjectMonitorInfo: function (id, monitorstatus, cb) {
-        return this.update({_id: id}, {
-            $set: {
-                lastmonitorstatus: monitorstatus,
-                lastmonitortime: new Date().toFormat("YYYY-MM-DD HH24:MI:SS")
-            }
-        }, cb);
+    findProjectMonitorByIDAndStatus(id, monitorstatus, cb)
+    {
+        return   this.findOne({"_id": id, "statistics.name": monitorstatus},cb);
+    },
+    updateProjectMonitorInfo: function (id, monitorstatus,projectinfo, cb) {
+
+        if (projectinfo && projectinfo._id) {
+            this.update({_id: id}, {
+                $set: {
+                    lastmonitorstatus: monitorstatus,
+                    lastmonitortime: new Date().toFormat("YYYY-MM-DD HH24:MI:SS")
+                }
+            }, cb);
+
+            this.update({_id: id, 'statistics.name': monitorstatus}, {
+                $inc: {
+                    'statistics.$.value': 1
+                }
+            }, false, cb);
+        }
+        else
+        {
+            this.update({_id: id}, {
+                $set: {
+                    lastmonitorstatus: monitorstatus,
+                    lastmonitortime: new Date().toFormat("YYYY-MM-DD HH24:MI:SS")
+                }
+                 ,
+                $addToSet: {
+                    'statistics': {'name':monitorstatus}
+                }
+            }, cb);
+        }
+
     }
 
 
@@ -125,7 +161,7 @@ ProjectSchema.methods.GetMonitortingStatus = function () {
 
         return '正常';
     }
-    else if (this.lastmonitorstatus == 404||this.lastmonitorstatus == 500) {
+    else if (this.lastmonitorstatus == 404 || this.lastmonitorstatus == 500) {
 
         return '出错';
     }
@@ -139,7 +175,7 @@ ProjectSchema.methods.GetMonitortingStatus = function () {
 };
 
 
-ProjectSchema.methods.GetParticipantStatus= function () {
+ProjectSchema.methods.GetParticipantStatus = function () {
 
     if (this.participants.status == 0) {
 
@@ -162,7 +198,7 @@ ProjectSchema.methods.GetStarttime = function () {
 ProjectSchema.methods.GetLastmonitortime = function () {
     if (this.lastmonitortime) {
         return moment(this.lastmonitortime).format('YYYY-MM-DD HH:MM:SS');
-    }else {
+    } else {
         return '';
     }
 };

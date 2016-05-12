@@ -98,53 +98,62 @@
         var pieChart = echarts.init(document.getElementById('pieChart'));
 
         pieoption = {
-            tooltip: {
-                trigger: 'item',
-                formatter: "{a} <br/>{b}: {c} ({d}%)"
-            },
-            legend: {
-                orient: 'vertical',
-                x: 'left',
-                data:['直达','营销广告','搜索引擎','邮件营销','联盟广告','视频广告','百度','谷歌','必应','其他']
-            },
-            series: [
-                {
-                    name:'访问来源',
-                    type:'pie',
-                    selectedMode: 'single',
-                    radius: [0, '30%'],
+            backgroundColor: '#2c343c',
 
+            title: {
+                text: '状态统计',
+                left: 'center',
+                top: 20,
+                textStyle: {
+                    color: '#ccc'
+                }
+            },
+
+            tooltip : {
+                trigger: 'item',
+                formatter: "{a} <br/>{b} : {c} ({d}%)"
+            },
+
+            visualMap: {
+                show: false,
+                min: 80,
+                max: 600,
+                inRange: {
+                    colorLightness: [0, 1]
+                }
+            },
+            series : [
+                {
+                    name:'状态统计',
+                    type:'pie',
+                    radius : '55%',
+                    center: ['50%', '50%'],
+                    data:[{{projectinfo.statistics}}].sort(function (a, b) { return a.value - b.value}),
+                    roseType: 'angle',
                     label: {
                         normal: {
-                            position: 'inner'
+                            textStyle: {
+                                color: 'rgba(255, 255, 255, 0.9)'
+                            }
                         }
                     },
                     labelLine: {
                         normal: {
-                            show: false
+                            lineStyle: {
+                                color: 'rgba(255, 255, 255, 0.9)'
+                            },
+                            smooth: 0.2,
+                            length: 10,
+                            length2: 20
                         }
                     },
-                    data:[
-                        {value:335, name:'直达', selected:true},
-                        {value:679, name:'营销广告'},
-                        {value:1548, name:'搜索引擎'}
-                    ]
-                },
-                {
-                    name:'访问来源',
-                    type:'pie',
-                    radius: ['40%', '55%'],
-
-                    data:[
-                        {value:335, name:'直达'},
-                        {value:310, name:'邮件营销'},
-                        {value:234, name:'联盟广告'},
-                        {value:135, name:'视频广告'},
-                        {value:1048, name:'百度'},
-                        {value:251, name:'谷歌'},
-                        {value:147, name:'必应'},
-                        {value:102, name:'其他'}
-                    ]
+                    itemStyle: {
+                        normal: {
+                            color: '#c23531',
+                            shadowBlur: 200,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        }
+                    }
                 }
             ]
         };
@@ -188,8 +197,6 @@
 
             <div id="tab_1_2" class="tab-pane profile-classic row-fluid active">
 
-                <div class="span2" ID="pieChart"></div>
-
                 <ul class="unstyled span10">
 
                     {{#with projectinfo}}
@@ -211,10 +218,14 @@
                     {{/with}}
                 </ul>
 
+                <div class="span2" style="height: 400px" ID="pieChart"></div>
 
             </div>
 
+
+
         </div>
+
 
 
         <!--END TABS-->
