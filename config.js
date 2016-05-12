@@ -22,7 +22,7 @@ config.siteinfo = {
 config.mongodb = {
     host: "127.0.0.1",
     port: "27017",
-    name: "nodedb"
+    name: "monitoring"
 };
 
 config.wechatinfo = {
@@ -125,7 +125,7 @@ config.event = {
             key: 'monitoring',
             name: '网站监测',
             minite: 1,
-            second: 5,
+            second: 60,
             enable: true,
             monitortemplateid:'mH8OqxlrWDrUz8ypFxlcpmrfjvfyIPzcZskYDmqk68Y',
             approvetemplateid:'8ywKTfOQ1goSifXXtScM7o3OdcEVpDK5Zwrb3rfvu1c'
