@@ -42,6 +42,22 @@ exports.detail = function*() {
 
     var projectinfo=yield thunkify(ProjectModel.findByid, ProjectModel)(info.id);
 
+    var projectmonitorlogs=yield thunkify(MonitorlogModel.findTopByProjectId,MonitorlogModel)(info.id,100);
+
+    var charttimedata=[],
+        chartvaluedata=[],
+        maxchartvalue=100;
+    yield projectmonitorlogs.map(function *(item) {
+
+        if (!maxchartvalue || item.responsetime>(maxchartvalue+100) )
+        {
+            maxchartvalue=item.responsetime+100;
+        }
+
+        charttimedata.unshift("'"+item.lastmonitortime.toFormat('YYYY-MM-DD HH24:MI:SS')+"'");
+        chartvaluedata.unshift(item.responsetime);
+    });
+
 
     console.log(projectinfo);
     if (result && result.participants[0].status == -1) {
@@ -58,7 +74,15 @@ exports.detail = function*() {
         yield baserender(this, "member/project/detail", {
             title: '项目详情',
             menuinfo:{project:"active",project_first:"active"},
+
             projectinfo: projectinfo,
+
+            charttimedata:charttimedata,
+
+            chartvaluedata:chartvaluedata,
+
+            maxchartvalue:maxchartvalue,
+            
 
             items: yield projectinfo.participants.map(function *(item) {
                 var newitem={};

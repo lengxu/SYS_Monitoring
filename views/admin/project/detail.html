@@ -164,7 +164,6 @@
 
     var projectid = '{{projectinfo._id}}';
     function doapprove(wechatuserid, status) {
-        alert('1');
         $.ajax({
             url: '/sysadmin/project/doapprove',
             type: 'post',
@@ -276,9 +275,9 @@
 
                     <tr>
 
-                        <th>OpenID</th>
+                        <th class="hidden-480">OpenID</th>
 
-                        <th>昵称</th>
+                        <th class="hidden-480">昵称</th>
 
                         <th>姓名</th>
 

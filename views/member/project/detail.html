@@ -46,6 +46,136 @@
 
 {{#section 'footer'}}
 <script type="text/javascript">
+    $(document).ready(function() {
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+
+
+        var timeData =[{{{charttimedata}}}];
+
+        timeData = timeData.map(function (str) {
+            return str.replace('2016-', '');
+        });
+
+        option = {
+            title: {
+                text: '监测响应时间',
+                x: 'center'
+            },
+            tooltip: {
+                trigger: 'axis',
+                formatter: function (params) {
+                    return params[0].name + '<br/>'
+                            + params[0].seriesName + ' : ' + params[0].value + ' 毫秒<br/>';
+                },
+                axisPointer: {
+                    animation: false
+                }
+            },
+
+
+            grid: {
+                left: 50,
+                right: 50,
+                height: '70%'
+            },
+            xAxis :
+            {
+                type : 'category',
+                boundaryGap : false,
+                axisLine: {onZero: true},
+                data: timeData
+            }
+            ,
+            yAxis : [
+                {
+                    name : '响应时间(毫秒)',
+                    type : 'value',
+                    max : {{maxchartvalue}}
+    }
+        ],
+        series : [
+            {
+                name:'响应时间',
+                type:'line',
+                symbolSize: 8,
+                hoverAnimation: false,
+                data:[{{chartvaluedata}}]
+    }
+        ]
+    };
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+
+        var pieChart = echarts.init(document.getElementById('pieChart'));
+
+        pieoption = {
+            backgroundColor: '#2c343c',
+
+            title: {
+                text: '状态统计',
+                left: 'center',
+                top: 20,
+                textStyle: {
+                    color: '#ccc'
+                }
+            },
+
+            tooltip : {
+                trigger: 'item',
+                formatter: "{a} <br/>{b} : {c} ({d}%)"
+            },
+
+            visualMap: {
+                show: false,
+                min: 80,
+                max: 600,
+                inRange: {
+                    colorLightness: [0, 1]
+                }
+            },
+            series : [
+                {
+                    name:'状态统计',
+                    type:'pie',
+                    radius : '55%',
+                    center: ['50%', '50%'],
+                    data:[{{projectinfo.statistics}}].sort(function (a, b) { return a.value - b.value}),
+                roseType: 'angle',
+                label: {
+            normal: {
+                textStyle: {
+                    color: 'rgba(255, 255, 255, 0.9)'
+                }
+            }
+        },
+        labelLine: {
+            normal: {
+                lineStyle: {
+                    color: 'rgba(255, 255, 255, 0.9)'
+                },
+                smooth: 0.2,
+                        length: 10,
+                        length2: 20
+            }
+        },
+        itemStyle: {
+            normal: {
+                color: '#c23531',
+                        shadowBlur: 200,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+            }
+        }
+    }
+        ]
+    };
+
+        // 使用刚指定的配置项和数据显示图表。
+        pieChart.setOption(pieoption);
+    });
+
+
     jQuery(document).ready(function () {
 
         $("#btapply").click(function () {
@@ -90,12 +220,11 @@
 
             <div id="tab_1_2" class="tab-pane profile-classic row-fluid active">
 
-
                 <ul class="unstyled span10">
 
                     {{#with projectinfo}}
 
-                    <li><span>项目名称:</span> {{name}}<input type="hidden" id="hdprojectid" value="{{projectinfo._id}}" /></li>
+                    <li><span>项目名称:</span> {{name}}<input type="hidden" id="hdprojectid" value="{{_id}}"/></li>
 
                     <li><span>部门:</span> {{department}}</li>
 
@@ -110,18 +239,21 @@
                     <li><span>最后监控状态:</span> {{GetMonitortingStatus}}</li>
 
                     {{/with}}
-
                 </ul>
+
+                <div class="span2" style="height: 400px" ID="pieChart"></div>
 
             </div>
 
+
+
         </div>
+
 
 
         <!--END TABS-->
 
         <!-- BEGIN INTERACTIVE CHART PORTLET-->
-
         <div class="portlet box red">
 
             <div class="portlet-title">
@@ -132,7 +264,8 @@
 
             <div class="portlet-body">
 
-                <div id="chart_2" class="chart"></div>
+                <!-- 为 ECharts 准备一个具备大小（宽高）的Dom -->
+                <div id="main"  class="chart"></div>
 
             </div>
 
@@ -163,9 +296,9 @@
 
                     <tr>
 
-                        <th>OpenID</th>
+                        <th class="hidden-480">OpenID</th>
 
-                        <th>昵称</th>
+                        <th class="hidden-480">昵称</th>
 
                         <th>姓名</th>
 
