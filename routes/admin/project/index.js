@@ -101,7 +101,7 @@ exports.detail = function*() {
 
     var charttimedata=[],
         chartvaluedata=[],
-        maxchartvalue;
+        maxchartvalue=100;
     yield projectmonitorlogs.map(function *(item) {
 
         if (!maxchartvalue || item.responsetime>(maxchartvalue+100) )
