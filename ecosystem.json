@@ -3,52 +3,45 @@
    * Application configuration section
    * http://pm2.keymetrics.io/docs/usage/application-declaration/
    */
-  apps : [
-
+  apps: [
     // First application
     {
-      name      : "API",
-      script    : "app.js",
+      name: "API",
+      script: "app.js",
       env: {
         COMMON_VARIABLE: "true"
       },
-      env_production : {
+      env_production: {
         NODE_ENV: "production"
       }
     },
-
     // Second application
     {
-      name      : "WEB",
-      script    : "web.js"
+      name: "WEB",
+      script: "web.js"
     }
   ],
-
   /**
    * Deployment section
    * http://pm2.keymetrics.io/docs/usage/deployment/
    */
-  deploy : {
-    production : {
-      user : "root",
-      host : "139.196.243.209",
-      ref  : "origin/master",
-      repo : "git@github.com:heshiliang/SYS_Monitoring.git",
-      path : "/www/web/monitor.ompchina.net",
-//      "post-deploy" : "/www/nserver/nodejs/bin/npm install;"
-      "post-deploy" : "/www/nserver/nodejs/bin/npm install;/www/nserver/nodejs/bin/pm2 start bin/www --name 'SYS_Monitoring' --watch"
-    }
-  ,
-    dev : {
-      user : "root",
-      host : "139.196.243.209",
-      ref  : "origin/dev",
-      repo : "git@github.com:heshiliang/SYS_Monitoring.git",
-      path : "/www/web/tsmonitor.ompchina.net",
-      "post-deploy" : "/www/nserver/nodejs/bin/npm install;/www/nserver/nodejs/bin/pm2 start bin/www --name 'TSSYS_Monitoring' --watch"
-      env  : {
-        NODE_ENV: "dev"
-      }
+  deploy: {
+    production: {
+      user: "root",
+      host: "139.196.243.209",
+      ref: "origin/master",
+      repo: "git@github.com:heshiliang/SYS_Monitoring.git",
+      path: "/www/web/monitor.ompchina.net",
+      //      "post-deploy" : "/www/nserver/nodejs/bin/npm install;"
+      "post-deploy": "/www/nserver/nodejs/bin/npm install;/www/nserver/nodejs/bin/pm2 start bin/www --name 'SYS_Monitoring' --watch"
+    },
+    dev: {
+      user: "root",
+      host: "139.196.243.209",
+      ref: "origin/dev",
+      repo: "git@github.com:heshiliang/SYS_Monitoring.git",
+      path: "/www/web/tsmonitor.ompchina.net",
+      "post-deploy": "/www/nserver/nodejs/bin/npm install;/www/nserver/nodejs/bin/pm2 start bin/www --name 'TSSYS_Monitoring' --watch"
     }
   }
 }
