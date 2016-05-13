@@ -38,11 +38,7 @@ config.wechatinfo = {
 config.wechatinfo.jssdk = {
     debug: false,
     jsApiList: ['checkJsApi',
-        'onMenuShareTimeline',
         'onMenuShareAppMessage',
-        'onMenuShareQQ',
-        'onMenuShareWeibo',
-        'onMenuShareQZone',
         'hideMenuItems',
         'showMenuItems',
         'hideAllNonBaseMenuItem',
