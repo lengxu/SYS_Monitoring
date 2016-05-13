@@ -121,7 +121,7 @@ config.event = {
             key: 'monitoring',
             name: '网站监测',
             minite: 1,
-            second: 60,
+            second: 5,
             enable: true,
             monitortemplateid:'mH8OqxlrWDrUz8ypFxlcpmrfjvfyIPzcZskYDmqk68Y',
             approvetemplateid:'8ywKTfOQ1goSifXXtScM7o3OdcEVpDK5Zwrb3rfvu1c'
