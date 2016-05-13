@@ -30,7 +30,7 @@ config.wechatinfo = {
     appsecret: '9a5b9e4d9973bf25b4db84aedb803e01',
     redirectUrl: 'http://monitor.ompchina.net/wechat/callback',
     scope: 'snsapi_userinfo',
-    jssdkdebug: false
+    jssdkdebug: true
 
 };
 
