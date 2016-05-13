@@ -157,7 +157,7 @@ ProjectSchema.methods.GetStatus = function () {
 
 ProjectSchema.methods.GetMonitortingStatus = function () {
 
-    if (this.lastmonitorstatus == 200) {
+    if (this.lastmonitorstatus == 200 ||this.lastmonitorstatus == 302  ) {
 
         return '正常';
     }
