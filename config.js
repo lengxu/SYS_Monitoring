@@ -14,8 +14,8 @@ var path = require('path');
 
 var path = require('path');
 config.siteinfo = {
-    domain: 'monitor.ompchina.net',
-    host: 'http://monitor.ompchina.net'
+    domain: 'tsmonitor.ompchina.net',
+    host: 'http://tsmonitor.ompchina.net'
 };
 
 //数据库信息
@@ -28,7 +28,7 @@ config.mongodb = {
 config.wechatinfo = {
     appid: 'wx1f984cba30eb34b7',
     appsecret: '9a5b9e4d9973bf25b4db84aedb803e01',
-    redirectUrl: 'http://monitor.ompchina.net/wechat/callback',
+    redirectUrl: 'http://tsmonitor.ompchina.net/wechat/callback',
     scope: 'snsapi_userinfo',
     jssdkdebug: true
 
