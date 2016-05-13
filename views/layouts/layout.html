@@ -151,7 +151,15 @@
             }
         });
 
-        wx.hideOptionMenu();
+        wx.hideMenuItems({
+            menuList: [
+                'menuItem:share:timeline'
+            ],
+            success: function (res) {
+            },
+            fail: function (res) {
+            }
+        });
 
     });
 </script>
