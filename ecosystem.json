@@ -40,7 +40,7 @@
     }
   ,
     dev : {
-      user : "node",
+      user : "root",
       host : "139.196.243.209",
       ref  : "origin/dev",
       repo : "git@github.com:heshiliang/SYS_Monitoring.git",
