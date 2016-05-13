@@ -192,7 +192,7 @@ ProjectSchema.methods.GetParticipantStatus = function () {
 
 
 ProjectSchema.methods.GetStarttime = function () {
-    return moment(this.starttime).format('YYYY-MM-DD HH:MM:SS');
+    return moment(this.starttime).format('DD-MM-YYYY');
 };
 
 ProjectSchema.methods.GetLastmonitortime = function () {
