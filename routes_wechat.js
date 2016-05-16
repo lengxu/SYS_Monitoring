@@ -6,7 +6,7 @@ var wechatqrcode = require('./routes/wechat/qrcode');
 var wechatgroup = require('./routes/wechat/group');
 var wechatip = require('./routes/wechat/ip');
 var project = require('./routes/member/project/index');
-var wechat = require('./routes/member/wechat/index');
+var memberwechat = require('./routes/member/wechat/index');
 var member = require('./routes/member/info/index');
 var auth = require('./lib/middlewares/auth');
 var wechatoauth = require('./lib/middlewares/wechatoauth');
@@ -52,7 +52,7 @@ module.exports = function (router) {
     router.post('/member/info/doedit', wechatoauth.infoapi(), member.doedit);
 
     //关注二维码
-    router.get('/member/wechat/index',  wechat.index);
+    router.get('/member/wechat/index',  memberwechat.index);
 
 
 
