@@ -19,7 +19,7 @@ var FormValidation = function () {
                 ignore: "",
                 rules: {
                     name: {
-                        minlength: 3,
+                        minlength: 2,
                         required: true
                     },
                     department: {
