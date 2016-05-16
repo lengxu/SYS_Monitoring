@@ -51,7 +51,7 @@ ProjectSchema.statics = {
     },
 
     findByidAndUserID: function (id, userid, cb) {
-        var result = this.findOne({"_id": id, "participants._id": userid})
+        var result = this.findOne({"_id": id, "participants._id": userid},{"participants.$":1});
 
         return result.populate('participants._id').exec(cb);
     },
