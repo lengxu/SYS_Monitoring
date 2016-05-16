@@ -26,6 +26,7 @@ exports.showindex = function*() {
         limit: resultsPerPage,
         offset: (currentPage * resultsPerPage) - resultsPerPage
     });
+    console.log(this.session.wechatUserInfo._id);
     yield baserender(this, "member/project/index", {
         title: '我的项目',
         menuinfo:{project:"active",project_first:"active"},
