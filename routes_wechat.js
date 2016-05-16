@@ -38,7 +38,7 @@ module.exports = function (router) {
     //未登陆pc端查看
     router.get('/project/:id?/detail',  project.detail);
     router.get('/member/project/', wechatoauth.infoview(), project.showindex);
-    router.get('/member/project/allproject', wechatoauth.infoview(), project.allproject);
+    router.get('/member/project/allproject', wechatoauth.infoview(), project.showallproject);
     router.get('/member/project/:id?/detail',project.pcCheck(), wechatoauth.infoview(), project.detail);
     router.post('/member/project/doapply', wechatoauth.infoapi(), project.doapply);
     router.get('/member/project/:projectid?/monitor', wechatoauth.view(), project.showmonitor);
