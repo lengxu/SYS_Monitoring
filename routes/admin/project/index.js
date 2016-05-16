@@ -42,6 +42,9 @@ exports.showindex = function*() {
         pagination: {page: currentPage, limit: resultsPerPage, totalRows: result.count}
     });
 }
+
+
+
 //添加项目
 exports.showadd = function*() {
     yield adminbaserender(this, "admin/project/add", {

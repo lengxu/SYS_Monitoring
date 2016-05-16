@@ -1,0 +1,130 @@
+{{#section 'pagelevelstyles'}}
+<!-- BEGIN PAGE LEVEL STYLES -->
+<link rel="stylesheet" type="text/css" href="/member/css/select2_metro.css"/>
+
+<link rel="stylesheet" href="/member/css/DT_bootstrap.css"/>
+
+<!-- END PAGE LEVEL STYLES -->
+{{/section}}
+
+{{#section 'pagelevelscripts'}}
+
+<!-- BEGIN PAGE LEVEL PLUGINS -->
+
+<script type="text/javascript" src="/member/js/select2.min.js"></script>
+
+
+<script type="text/javascript" src="/member/js/DT_bootstrap.js"></script>
+
+<!-- END PAGE LEVEL PLUGINS -->
+
+<!-- BEGIN PAGE LEVEL SCRIPTS -->
+
+<script src="/member/js/table-advanced.js"></script>
+
+<!-- END PAGE LEVEL STYLES -->
+
+{{/section}}
+
+
+{{#section 'footer'}}
+<script>
+    jQuery(document).ready(function () {
+
+        TableAdvanced.init();
+
+    });
+
+</script>
+{{/section}}
+
+
+<!-- BEGIN PAGE CONTENT-->
+
+<div class="row-fluid">
+
+    <div class="span12">
+
+        <!-- BEGIN EXAMPLE TABLE PORTLET-->
+
+        <div class="portlet box green">
+
+            <div class="portlet-title">
+
+                <div class="caption"><i class="icon-globe"></i>项目列表</div>
+
+            </div>
+
+            <div class="portlet-body">
+
+                <table class="table table-striped table-bordered table-hover table-full-width" id="sample_1">
+
+                    <thead>
+
+                    <tr>
+
+                        <th>项目名称</th>
+
+                        <th>状态</th>
+
+                        <th class="hidden-480">部门</th>
+
+                        <th class="hidden-480">项目URL</th>
+
+                        <th class="hidden-480">最后监测时间</th>
+
+                        <th class="hidden-480">是否开启</th>
+
+                        <th >操作</th>
+
+                    </tr>
+
+                    </thead>
+
+                    <tbody>
+                    {{#items}}
+                    <tr>
+
+                        <td>{{name}}</td>
+
+                        <td>{{GetMonitortingStatus}}</td>
+
+                        <td class="hidden-480">{{department}}</td>
+
+                        <td class="hidden-480"><a href="{{siteurl}}" target="_blank">点击访问</a></td>
+
+                        <td class="hidden-480">{{GetLastmonitortime}}</td>
+
+                        <td class="hidden-480">{{GetStatus}}</td>
+
+                        <td ><a href="/member/project/{{_id}}/detail" target="_blank">打开项目</a></td>
+
+                    </tr>
+                    {{/items}}
+                    </tbody>
+
+                </table>
+
+                <div class="row-fluid">
+                    <div class="span6">
+                        <div class="dataTables_info" id="sample_1_info">总数量:{{totalRows}}</div>
+                    </div>
+                    <div class="span6">
+                        <div class="dataTables_paginate paging_bootstrap pagination">
+                            {{{paginateHelper pagination paginationClass='some' leftText='← <span
+                                class="hidden-480">Previous</span>
+                            ' rightText='<span class="hidden-480">Next</span> → '}}}
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- END EXAMPLE TABLE PORTLET-->
+
+</div>
+
+
+<!-- END PAGE CONTENT-->
