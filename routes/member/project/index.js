@@ -38,29 +38,18 @@ exports.showindex = function*() {
 //所有项目列表
 exports.showallproject = function*() {
     var requestinfo = this.request.query;
-
-
-    var condition = {};
-
-    if (requestinfo.participantsid) {
-        condition.participants = {_id: requestinfo.participantsid};
-    }
-
     const resultsPerPage = config.paginate.resultsPerPage;
     const currentPage = requestinfo.page || 1; // You should use this.query.page here
     var result = yield ProjectModel.paginate({
-        conditions: condition, // Only enabled items
-        columns: '', // Retrieve only those columns
+        // columns: '', // Retrieve only those columns
+        conditions: {},
         sortBy: {'_id': -1}, // Sort by _id DESC
         limit: resultsPerPage,
         offset: (currentPage * resultsPerPage) - resultsPerPage
     });
-
-    console.log(result);
-
-    yield adminbaserender(this, "member/project/allproject", {
-        title: '项目列表',
-        menuinfo: {project: "active", project_second: "active"},
+    yield baserender(this, "member/project/allproject", {
+        title: '所有项目',
+        menuinfo:{project:"active",project_second:"active"},
         totalRows: result.count,
         items: result.data,
         pagination: {page: currentPage, limit: resultsPerPage, totalRows: result.count}
