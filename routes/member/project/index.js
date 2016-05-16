@@ -59,6 +59,7 @@ exports.detail = function*() {
     });
 
 
+    console.log(result);
     console.log(projectinfo);
     if (result && result.participants[0].status == -1) {
 
