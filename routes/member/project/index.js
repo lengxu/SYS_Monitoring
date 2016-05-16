@@ -21,7 +21,7 @@ exports.showindex = function*() {
     const currentPage = requestinfo.page || 1; // You should use this.query.page here
     var result = yield ProjectModel.paginate({
         // columns: '', // Retrieve only those columns
-        conditions: {participants:{'_id':this.session.wechatUserInfo._id,"status":0}},
+        conditions: {'participants':{'_id':this.session.wechatUserInfo._id,'status':0}},
         sortBy: {'_id': -1}, // Sort by _id DESC
         limit: resultsPerPage,
         offset: (currentPage * resultsPerPage) - resultsPerPage
