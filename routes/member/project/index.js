@@ -93,7 +93,7 @@ exports.detail = function*() {
 
         });
     }
-    else if (result && userinforesult.sendallprojectstatus==0) {
+    else if (result || userinforesult.sendallprojectstatus==0) {
         yield baserender(this, "member/project/detail", {
             title: '项目详情',
             menuinfo:{project:"active",project_first:"active"},
