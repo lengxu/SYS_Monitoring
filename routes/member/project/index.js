@@ -80,7 +80,10 @@ exports.detail = function*() {
     });
 
 
-    if (result && result.participants[0].status == -1) {
+    var userinforesult = yield thunkify(WechatUserModel.findByOpenID, WechatUserModel)(this.session.wechatUserInfo.openid);
+
+
+    if (result && result.participants[0].status == -1&& (userinforesult.sendallprojectstatus!=0)) {
 
         yield baserender(this, "member/project/approve", {
             title: '你的申请还未审批',
@@ -90,7 +93,7 @@ exports.detail = function*() {
 
         });
     }
-    else if (result) {
+    else if (result && userinforesult.sendallprojectstatus==0) {
         yield baserender(this, "member/project/detail", {
             title: '项目详情',
             menuinfo:{project:"active",project_first:"active"},

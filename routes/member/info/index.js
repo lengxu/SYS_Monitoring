@@ -49,9 +49,9 @@ exports.doedit = function*() {
 
     var wechatuser = this.session.wechatUserInfo;
 
-    wechatuser.userinf=info;
+    wechatuser.userinfo=info;
 
-    wechatuser.userinf.updatetime=new Date().toFormat("YYYY-MM-DD HH24:MI:SS");
+    wechatuser.userinfo.updatetime=new Date().toFormat("YYYY-MM-DD HH24:MI:SS");
 
     yield thunkify(WechatUserModel.updateUserInfoByOpenID,WechatUserModel)(wechatuser.openid,info);
 
